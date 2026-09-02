@@ -202,6 +202,11 @@
     font-style:italic;
     color:var(--gold-soft);
   }
+  .hero-copy h1 .hero-word{
+    font-size:1.12em;
+    display:inline-block;
+    line-height:0.92;
+  }
 
   .hero-copy p{
     font-size:1.05rem;
@@ -457,6 +462,107 @@
   .lightbox-nav:hover{background:rgba(255,255,255,0.12);}
   .lightbox-prev{left:20px;}
   .lightbox-next{right:20px;}
+
+  /* ---------- TESTIMONIOS ---------- */
+  #testimonios{
+    background:linear-gradient(180deg, var(--surface) 0%, var(--bg-dark) 100%);
+    overflow:hidden;
+  }
+  .testimonials-head{
+    margin-bottom:54px;
+  }
+  .testimonials-carousel{
+    position:relative;
+    display:grid;
+    grid-template-columns:52px minmax(0,1fr) 52px;
+    gap:18px;
+    align-items:center;
+  }
+  .testimonial-track{
+    display:grid;
+    grid-template-columns:1fr 1.12fr 1fr;
+    gap:20px;
+    align-items:stretch;
+  }
+  .testimonial-card{
+    background:rgba(255,255,255,0.28);
+    border:1px solid rgba(4,37,60,0.12);
+    border-radius:18px;
+    padding:30px 26px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:430px;
+    transition:transform .35s ease, opacity .35s ease, box-shadow .35s ease, background .35s ease;
+  }
+  .testimonial-card.side{
+    opacity:.68;
+    transform:scale(.94);
+  }
+  .testimonial-card.main{
+    background:rgba(255,255,255,0.52);
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 22px 50px -28px rgba(4,37,60,.45);
+    border-color:rgba(4,37,60,.22);
+  }
+  .testimonial-avatar{
+    width:86px;
+    height:86px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:16px;
+    border:3px solid rgba(255,255,255,.72);
+    box-shadow:0 8px 24px -14px rgba(4,37,60,.55);
+  }
+  .testimonial-card.main .testimonial-avatar{
+    width:102px;
+    height:102px;
+  }
+  .testimonial-name{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.48rem;
+    color:var(--ivory);
+    margin-bottom:2px;
+  }
+  .testimonial-role{
+    min-height:20px;
+    font-family:'Jost', sans-serif;
+    font-size:.72rem;
+    letter-spacing:.08em;
+    color:rgba(4,37,60,.56);
+    margin-bottom:16px;
+  }
+  .testimonial-text{
+    font-size:.9rem;
+    line-height:1.68;
+    color:rgba(32,48,44,.74);
+    margin:auto 0 0;
+  }
+  .testimonial-card.main .testimonial-text{
+    font-size:.96rem;
+    color:rgba(32,48,44,.84);
+  }
+  .testimonial-arrow{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid rgba(4,37,60,.28);
+    background:rgba(255,255,255,.36);
+    color:var(--gold);
+    font-family:'Cormorant Garamond', serif;
+    font-size:2rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .testimonial-arrow:hover{
+    transform:scale(1.06);
+    background:rgba(255,255,255,.62);
+  }
 
   /* ---------- PLANES ---------- */
   #planes{background:linear-gradient(180deg, var(--surface) 0%, var(--bg-dark) 100%);}
@@ -746,6 +852,8 @@
     .step:nth-child(4){border-right:none;}
     .simon-grid{grid-template-columns:1fr;}
     .simon-photo{max-width:340px;}
+    .testimonial-track{gap:12px;}
+    .testimonial-card{padding:24px 18px;min-height:450px;}
   }
 
   @media (max-width:760px){
@@ -757,6 +865,18 @@
     .cta-nav{padding:11px 20px !important;font-size:0.78rem !important;}
     .burger{display:none;}
     .gallery{column-count:2;}
+    .testimonials-carousel{grid-template-columns:36px minmax(0,1fr) 36px;gap:8px;}
+    .testimonial-track{grid-template-columns:.72fr 1.45fr .72fr;gap:8px;}
+    .testimonial-card{min-height:390px;padding:20px 10px;border-radius:14px;}
+    .testimonial-card.side{opacity:.5;transform:scale(.9);overflow:hidden;}
+    .testimonial-card.side .testimonial-avatar{width:54px;height:54px;}
+    .testimonial-card.side .testimonial-name{font-size:1rem;}
+    .testimonial-card.side .testimonial-role{font-size:.58rem;}
+    .testimonial-card.side .testimonial-text{display:none;}
+    .testimonial-card.main{transform:translateY(-6px) scale(1);} 
+    .testimonial-card.main .testimonial-avatar{width:80px;height:80px;}
+    .testimonial-card.main .testimonial-text{font-size:.82rem;line-height:1.55;}
+    .testimonial-arrow{width:34px;height:34px;font-size:1.55rem;}
     .lightbox-nav{width:38px;height:38px;font-size:1.2rem;}
     .lightbox-prev{left:8px;}
     .lightbox-next{right:8px;}
@@ -781,6 +901,7 @@
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#proceso">Proceso</a></li>
       <li><a href="#portafolio">Portafolio</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
       <li><a href="#planes">Planes</a></li>
       <li><a href="#simon">Simón</a></li>
       <li><a href="#contacto" class="cta-nav">Contáctanos ahora</a></li>
@@ -795,11 +916,10 @@
     <span class="xv-numeral">XV</span>
     <div class="wrap hero-inner">
       <div class="hero-copy reveal in">
-        <span class="eyebrow">Fotografía de XV años</span>
-        <h1>Tus quince, contados tan <em>auténticos</em> como tú.</h1>
-        <p>Yo te acompaño mientras te hago reír un poquito, para capturar en tus fotos justo esa risa que te hace auténtica. Porque esa autenticidad es la que más vas a querer recordar en unos años.</p>
+        <h1>Tus <em class="hero-word">quince</em>, contados tan <em class="hero-word">auténticos</em> como <em class="hero-word">tú</em>.</h1>
+        <p>Las sesiones conmigo son un parche, con la intención de hacerte reír un montón y que las fotos fluyan tan auténticas como tú. Eso es lo diferente de las fotos de tus quince: que nadie más puede ser como tú y que nadie lo va a capturar mejor que yo.</p>
         <div class="hero-actions">
-          <a href="https://wa.me/573195706981?text=Hola%20Sim%C3%B3n%2C%20%C2%BFc%C3%B3mo%20est%C3%A1s%3F%20Me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20de%2015s%20contigo." class="btn-primary" target="_blank" rel="noopener">Reserva tus 15s</a>
+          <a href="https://wa.me/573195706981?text=Hola%20Sim%C3%B3n%2C%20%C2%BFc%C3%B3mo%20est%C3%A1s%3F%20Me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20de%2015s%20contigo." class="btn-primary" target="_blank" rel="noopener">¿Te atreves?</a>
         </div>
       </div>
       <div class="hero-visual" id="heroCarousel"></div>
@@ -811,8 +931,6 @@
   <section id="proceso">
     <div class="wrap">
       <div class="section-head reveal">
-        <div class="divider-ornament"><span class="diamond"></span><span class="rule"></span></div>
-        <span class="eyebrow">Cómo trabajamos</span>
         <h2>Cuatro pasos, <em>un solo</em> recuerdo.</h2>
         <p>Cada sesión de Simón sigue el mismo ritual, pensado para que llegues tranquila y salgas con fotos que sí se parecen a ti.</p>
       </div>
@@ -845,8 +963,6 @@
   <section id="portafolio">
     <div class="wrap">
       <div class="section-head reveal">
-        <div class="divider-ornament"><span class="diamond"></span><span class="rule"></span></div>
-        <span class="eyebrow">Portafolio</span>
         <h2>Algunas <em>quinces</em> recientes.</h2>
         <p>Una muestra de sesiones reales — cada una con su propia locación, luz y personalidad.</p>
       </div>
@@ -861,12 +977,26 @@
     <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Foto siguiente">›</button>
   </div>
 
+  <!-- TESTIMONIOS -->
+  <section id="testimonios">
+    <div class="wrap">
+      <div class="section-head testimonials-head reveal">
+        <h2>Testimonios.</h2>
+        <p>Lo que algunos de mis clientes valoran más de mi trabajo.</p>
+      </div>
+
+      <div class="testimonials-carousel reveal" aria-roledescription="carrusel" aria-label="Testimonios de clientes">
+        <button class="testimonial-arrow testimonial-prev" id="testimonialPrev" type="button" aria-label="Ver testimonios anteriores">‹</button>
+        <div class="testimonial-track" id="testimonialTrack" aria-live="polite"></div>
+        <button class="testimonial-arrow testimonial-next" id="testimonialNext" type="button" aria-label="Ver testimonios siguientes">›</button>
+      </div>
+    </div>
+  </section>
+
   <!-- PLANES -->
   <section id="planes">
     <div class="wrap">
       <div class="section-head reveal">
-        <div class="divider-ornament"><span class="diamond"></span><span class="rule"></span></div>
-        <span class="eyebrow">Planes</span>
         <h2>Arma <em>tu</em> plan de 15 años.</h2>
         <p>Tu plan de 15 años debe ser tan a tu medida, tan auténtico como tú. Por eso dejo que elijas lo que más te guste para tu día de 15 años.</p>
       </div>
@@ -947,8 +1077,6 @@
         <img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786243712/IMG_9078_zzyhmn.jpg" alt="Retrato del fotógrafo Simón">
       </div>
       <div class="simon-copy reveal">
-        <div class="divider-ornament"><span class="diamond"></span><span class="rule"></span></div>
-        <span class="eyebrow">Quién dirige tu sesión</span>
         <p class="simon-quote">Cada quinceañera merece verse en sus fotos como se siente ese día: grande, segura y ella misma.</p>
         <p class="bio">Soy Simón, soy parchado, gracioso y con una actitud increíble para atreverme a hacer las fotos que a ti mejor te hagan sentir bien y auténtica. Esta descripción, más que para hablar de mí, quiero que sea para contarte que en todo momento frente a mi cámara te vas a sentir segura y libre. Ese es mi plus: no ser el tipo de fotógrafo cuadriculado que te pone a hacer un montón de poses absurdas, sino el que te brinda confianza y comodidad.</p>
         <div class="simon-stats">
@@ -963,7 +1091,6 @@
   <!-- CONTACTO -->
   <section id="contacto">
     <div class="wrap">
-      <span class="eyebrow">Contacto</span>
       <h2>Cuéntame la idea para <em>tus</em> quinces.</h2>
       <p class="sub">Quiero que me cuentes de ti, de tu autenticidad y cuál es el sueño que quieres que yo plasme en tus fotos. Podemos hacerlo en una llamadita o un cafecito. ¡Escríbeme!</p>
       <div class="contact-actions">
@@ -1170,6 +1297,81 @@
         }
         render();
       });
+    });
+
+    render();
+  })();
+
+  // testimonios
+  (function(){
+    const testimonials = [
+      {
+        name:'Evelyn',
+        role:'',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368413/2_kluq1j.png',
+        text:'Me encantó tu energía al momento de tomar las fotos. Siempre me hacías sonreír para que salieran más lindas esas fotos. 10/10, buenísimas. Y lo mejor de la experiencia es que por todo me hacías reír; de toda parte sacabas tema para hacerme reír. Por eso todas las fotos quedaron divinas.'
+      },
+      {
+        name:'Mariana',
+        role:'',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368413/1_ydwbrm.png',
+        text:'Simón, quedé muy agradecida por tus fotos. Se siente un ambiente muy agradable cuando estás trabajando. Quedé muy satisfecha con las fotos, con el trabajo y con el libro; todo estuvo súper bien preparado. Te doy mil gracias por cumplirme el sueño que tanto deseaba de pequeña. Un día y un sueño que siempre tuve se hizo realidad gracias a ti.'
+      },
+      {
+        name:'Michell',
+        role:'Mamá de Michell',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368414/5_cgndof.png',
+        text:'Simón, te felicito por ese trabajo tan excelente e impecable que haces. Me dejaste sin palabras, sorprendida con esas fotos tan hermosas. Te voy a recomendar siempre. Tienes mucha paciencia y actitud, eres 100/100. Me encantó que te gusta hacer fotos en todas partes. Estoy súper encantada. Simón, que Dios te bendiga y multiplique tu trabajo. No tengo más palabras para decir lo que siento en este momento. Soy una mamá muy contenta.'
+      },
+      {
+        name:'Mariana',
+        role:'Papá de Mariana',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368413/4_dnfdfc.png',
+        text:'Simón, de verdad que tienes mucho profesionalismo. Es muy difícil encontrar personas que trabajen con tanto amor y dedicación, y eso es lo que te hace un profesional. Qué fotos tan hermosas las que hiciste. Tienes muchísima paciencia y la verdad es que todo estuvo genial.'
+      },
+      {
+        name:'Isabella',
+        role:'',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368413/3_ox4o5i.png',
+        text:'Tuve una experiencia bastante buena. Me encantó la creatividad que tienes para aprovechar los espacios y buscar que cada foto se vea especial y diferente. Eres muy atento, amable y paciente; eso hace que uno se sienta muy cómodo durante la sesión. Se nota muchísimo el profesionalismo, la dedicación y calidad en el trabajo. La atención fue excelente y quedé muy feliz con el resultado. Sin duda fue una experiencia muy bonita. Lo recomiendo un montón por su calidad y, sobre todo, por la excelente persona que es.'
+      }
+    ];
+
+    const track = document.getElementById('testimonialTrack');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
+    if(!track || !prevBtn || !nextBtn) return;
+
+    let current = 0; // Evelyn inicia en el centro
+
+    function card(t, position){
+      const article = document.createElement('article');
+      article.className = `testimonial-card ${position}`;
+      article.innerHTML = `
+        <img class="testimonial-avatar" src="${t.photo}" alt="Foto de ${t.name}" loading="lazy">
+        <h3 class="testimonial-name">${t.name}</h3>
+        <div class="testimonial-role">${t.role || '&nbsp;'}</div>
+        <p class="testimonial-text">${t.text}</p>
+      `;
+      return article;
+    }
+
+    function render(){
+      const prevIndex = (current - 1 + testimonials.length) % testimonials.length;
+      const nextIndex = (current + 1) % testimonials.length;
+      track.innerHTML = '';
+      track.appendChild(card(testimonials[prevIndex], 'side'));
+      track.appendChild(card(testimonials[current], 'main'));
+      track.appendChild(card(testimonials[nextIndex], 'side'));
+    }
+
+    prevBtn.addEventListener('click', () => {
+      current = (current - 1 + testimonials.length) % testimonials.length;
+      render();
+    });
+    nextBtn.addEventListener('click', () => {
+      current = (current + 1) % testimonials.length;
+      render();
     });
 
     render();
