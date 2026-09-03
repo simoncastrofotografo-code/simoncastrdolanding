@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Portafolio — Simón Fotografía</title>
+  <meta name="description" content="Portafolio de sesiones de XV años de Simón Fotografía.">
+
+  <link rel="icon" href="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788406071/6_xbqwe1.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #F4EEDD;
+      --surface: #ECE3CC;
+      --surface-2: #E3D6AF;
+      --gold: #04253C;
+      --gold-soft: #04253C;
+      --blush: #073E65;
+      --ivory: #04253C;
+      --coral: #04253C;
+      --coral-dark: #031B2D;
+      --nav-text: #073E65;
+      --line: rgba(4, 37, 60, 0.22);
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--ivory);
+      font-family: "Jost", sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       NAVBAR — MISMO DISEÑO DEL INDEX
+       ========================= */
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.38);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      transition: background .4s ease, border-color .4s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(255, 255, 255, 0.55);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      max-width: 1180px;
+      margin: 0 auto;
+      gap: 24px;
+    }
+
+    .brand {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      height: 58px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.35));
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 38px;
+    }
+
+    .nav-actions a {
+      font-size: .86rem;
+      letter-spacing: .04em;
+      color: var(--blush);
+      position: relative;
+      padding: 4px 0;
+      transition: color .25s ease;
+    }
+
+    .nav-actions .nav-home::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 1px;
+      background: var(--gold);
+      transition: width .3s ease;
+    }
+
+    .nav-actions .nav-home:hover {
+      color: var(--gold-soft);
+    }
+
+    .nav-actions .nav-home:hover::after {
+      width: 100%;
+    }
+
+    .cta-nav {
+      background: var(--coral);
+      color: #fff !important;
+      padding: 12px 26px !important;
+      border-radius: 2px;
+      font-weight: 500;
+      font-size: .82rem !important;
+      letter-spacing: .05em !important;
+      box-shadow: 0 6px 20px -6px rgba(30,138,114,.55);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease !important;
+    }
+
+    .cta-nav::after {
+      display: none;
+    }
+
+    .cta-nav:hover {
+      background: var(--coral-dark) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px -6px rgba(30,138,114,.7);
+      color: #fff !important;
+    }
+
+    /* =========================
+       INTRO
+       ========================= */
+
+    .portfolio-intro {
+      width: min(1200px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: 105px 0 75px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin-bottom: 17px;
+      color: var(--blush);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .portfolio-intro h1 {
+      color: var(--gold);
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(52px, 7vw, 96px);
+      font-weight: 500;
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+    }
+
+    .portfolio-intro p {
+      max-width: 620px;
+      margin: 28px auto 0;
+      color: var(--nav-text);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       PORTFOLIO
+       ========================= */
+
+    .portfolio-list {
+      width: min(1280px, calc(100% - 64px));
+      margin: 0 auto;
+      padding-bottom: 110px;
+    }
+
+    .portfolio-item {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      width: 100%;
+      margin-bottom: 24px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .portfolio-item.reverse {
+      grid-template-columns: 2fr 3fr;
+    }
+
+    .portfolio-image-wrap {
+      min-width: 0;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    /*
+      IMPORTANTE:
+      La imagen nunca recibe una altura fija.
+      width: 100% + height: auto mantiene exactamente
+      la proporción original tanto en PC como en celular.
+    */
+    .portfolio-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .portfolio-info {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 55px 45px;
+      background: #f1f1f1;
+      text-align: center;
+    }
+
+    .portfolio-info-inner {
+      max-width: 330px;
+    }
+
+    .portfolio-info h2 {
+      color: #111111;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(34px, 3.5vw, 56px);
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 13px;
+      text-transform: capitalize;
+    }
+
+    .portfolio-info p {
+      color: #8a8a8a;
+      font-family: "Jost", sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+    }
+
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+      transition: gap 0.25s ease, border-color 0.25s ease;
+    }
+
+    .portfolio-link:hover {
+      gap: 16px;
+      border-color: var(--gold);
+    }
+
+    .portfolio-link span {
+      font-size: 17px;
+      line-height: 0;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 55px 32px;
+      text-align: center;
+    }
+
+    .site-footer p {
+      color: var(--nav-text);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .site-footer a {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+
+    /* =========================
+       FOOTER — MISMO DISEÑO DEL INDEX
+       ========================= */
+    footer{
+      border-top:1px solid var(--line);
+      padding:55px 32px 0;
+      text-align:center;
+    }
+
+    .footer-inner{
+      max-width:1180px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:30px;
+    }
+
+    .footer-inner .logo{
+      display:block;
+      flex-shrink:0;
+    }
+
+    .footer-inner .logo img{
+      height:38px;
+      width:auto;
+      display:block;
+    }
+
+    footer p{
+      color:rgba(32,48,44,0.5);
+      font-size:0.82rem;
+      max-width:420px;
+      line-height:1.5;
+      margin:0;
+    }
+
+    .footer-bottom{
+      margin-top:20px;
+      padding:16px 0;
+      border-top:1px solid rgba(4,37,60,0.1);
+      font-size:0.72rem;
+      color:rgba(32,48,44,0.4);
+      text-align:center;
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 900px) {
+      .footer-inner{
+        flex-direction:column;
+        text-align:center;
+      }
+
+      footer p{
+        margin:0 auto;
+      }
+
+      .nav {
+        width: 100%;
+        padding: 13px 18px;
+        gap: 16px;
+      }
+
+      .brand img {
+        height: 48px;
+      }
+
+      .nav-actions {
+        gap: 14px;
+        margin-left: auto;
+      }
+
+      .nav-actions .nav-home {
+        font-size: .78rem;
+        padding: 4px 0;
+      }
+
+      .cta-nav {
+        padding: 10px 15px !important;
+        font-size: .68rem !important;
+        white-space: nowrap;
+      }
+
+      .portfolio-intro {
+        width: min(100% - 36px, 1200px);
+        padding: 115px 0 50px;
+      }
+
+      .portfolio-intro p {
+        font-size: 15px;
+      }
+
+      .portfolio-list {
+        width: min(100% - 36px, 1280px);
+        padding-bottom: 65px;
+      }
+
+      /*
+        En móvil cada proyecto se convierte en:
+        imagen completa -> información.
+        La imagen conserva su proporción natural.
+      */
+      .portfolio-item,
+      .portfolio-item.reverse {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 22px;
+      }
+
+      .portfolio-info {
+        min-height: 0;
+        padding: 32px 22px 35px;
+      }
+
+      .portfolio-info h2 {
+        font-size: 39px;
+        margin-bottom: 8px;
+      }
+
+      .portfolio-info p {
+        margin-bottom: 19px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav {
+        padding: 12px 12px;
+      }
+
+      .brand img {
+        height: 43px;
+      }
+
+      .nav-actions {
+        gap: 10px;
+      }
+
+      .nav-actions .nav-home {
+        font-size: .72rem;
+      }
+
+      .cta-nav {
+        padding: 9px 11px !important;
+        font-size: .62rem !important;
+      }
+
+      .portfolio-intro h1 {
+        font-size: 55px;
+      }
+
+      .portfolio-intro p {
+        line-height: 1.65;
+      }
+
+      .portfolio-list {
+        width: calc(100% - 24px);
+      }
+
+      .portfolio-info {
+        padding: 28px 18px 31px;
+      }
+
+      .portfolio-info h2 {
+        font-size: 36px;
+      }
+    }
+    @media (max-width: 480px) {
+      .portfolio-intro h1 {
+        font-size: 55px;
+      }
+
+      .portfolio-intro p {
+        line-height: 1.65;
+      }
+
+      .portfolio-list {
+        width: calc(100% - 24px);
+      }
+
+      .portfolio-info {
+        padding: 28px 18px 31px;
+      }
+
+      .portfolio-info h2 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+       ========================= -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav" aria-label="Navegación principal">
+
+      <a class="brand" href="index.html#inicio" aria-label="Volver al inicio de Simón Fotografía">
+        <img
+          src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1775329971/logo_para_web_oflm4x.png"
+          alt="Simón Fotografía"
+        >
+      </a>
+
+      <div class="nav-actions">
+        <a class="nav-home" href="index.html#inicio">Inicio</a>
+
+        <a
+          class="cta-nav"
+          href="https://wa.me/573195706981?text=Hola%20Sim%C3%B3n%2C%20quiero%20cotizar%20una%20sesi%C3%B3n%20de%20XV."
+          target="_blank"
+          rel="noopener"
+        >
+          Contáctanos ahora
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <main id="portafolio">
+
+    <!-- =========================
+         INTRO
+         ========================= -->
+    <section class="portfolio-intro">
+      <div class="eyebrow">Simón Fotografía</div>
+      <h1>Mi portafolio</h1>
+      <p>
+        Una selección de sesiones de XV años. Cada historia tiene su propia
+        luz, locación y personalidad.
+      </p>
+    </section>
+
+    <!-- =========================
+         GALERÍAS
+         ========================= -->
+    <section class="portfolio-list" aria-label="Galerías de XV años">
+
+      <!-- MARIANA -->
+      <article class="portfolio-item">
+        <a class="portfolio-image-wrap" href="mariana.html" aria-label="Ver galería de Mariana">
+          <img
+            class="portfolio-image"
+            src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454599/1mariana-18-34.jpg"
+            alt="Portada de la sesión de XV años de Mariana"
+            loading="eager"
+          >
+        </a>
+
+        <div class="portfolio-info">
+          <div class="portfolio-info-inner">
+            <h2>Mariana</h2>
+            <p>Sesión de XV años</p>
+            <a class="portfolio-link" href="mariana.html">
+              Ver galería <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- EVELYN -->
+      <article class="portfolio-item reverse">
+        <div class="portfolio-info">
+          <div class="portfolio-info-inner">
+            <h2>Evelyn</h2>
+            <p>Sesión de XV años</p>
+            <a class="portfolio-link" href="evelyn.html">
+              Ver galería <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <a class="portfolio-image-wrap" href="evelyn.html" aria-label="Ver galería de Evelyn">
+          <img
+            class="portfolio-image"
+            src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454898/fotografia-quincea%C3%B1os-rionegro-20.jpg"
+            alt="Portada de la sesión de XV años de Evelyn"
+            loading="lazy"
+          >
+        </a>
+      </article>
+
+      <!-- ISABELLA -->
+      <article class="portfolio-item">
+        <a class="portfolio-image-wrap" href="isabella.html" aria-label="Ver galería de Isabella">
+          <img
+            class="portfolio-image"
+            src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788452626/fotografia-quincea%C3%B1os-llanogrande-7-2.jpg"
+            alt="Portada de la sesión de XV años de Isabella"
+            loading="lazy"
+          >
+        </a>
+
+        <div class="portfolio-info">
+          <div class="portfolio-info-inner">
+            <h2>Isabella</h2>
+            <p>Sesión de XV años</p>
+            <a class="portfolio-link" href="isabella.html">
+              Ver galería <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- DULCE -->
+      <article class="portfolio-item reverse">
+        <div class="portfolio-info">
+          <div class="portfolio-info-inner">
+            <h2>Dulce</h2>
+            <p>Sesión de XV años</p>
+            <a class="portfolio-link" href="dulce.html">
+              Ver galería <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <a class="portfolio-image-wrap" href="dulce.html" aria-label="Ver galería de Dulce">
+          <img
+            class="portfolio-image"
+            src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454684/fotografia-quincea%C3%B1os-recinto-quirama-39.jpg"
+            alt="Portada de la sesión de XV años de Dulce"
+            loading="lazy"
+          >
+        </a>
+      </article>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <a href="index.html#inicio" class="logo" aria-label="Volver al inicio">
+        <img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1775329971/logo_para_web_oflm4x.png" alt="Simón Fotografía">
+      </a>
+      <p>Fotografía de 15 años en El Oriente Antioqueño y Colombia. Sesiones donde las fotos son tan auténticas como tú.</p>
+    </div>
+    <div class="footer-bottom">© 2022 Simón Castro Fotógrafo. Todos los derechos reservados.</div>
+  </footer>
+
+  <script>
+    // Mantiene el mismo comportamiento visual de la navbar del index:
+    // cambia ligeramente el fondo al hacer scroll.
+    const siteHeader = document.getElementById("siteHeader");
+
+    window.addEventListener("scroll", () => {
+      siteHeader.classList.toggle("scrolled", window.scrollY > 40);
+    });
+  </script>
+
+</body>
+</html>
