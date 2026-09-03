@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simón Fotografía — Sesiones de XV años</title>
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788406071/6_xbqwe1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-dark:#F4EEDD;
+    --surface:#ECE3CC;
+    --surface-2:#E3D6AF;
+    --gold:#04253C;
+    --gold-soft:#04253C;
+    --blush:#073E65;
+    --ivory:#04253C;
+    --coral:#04253C;
+    --coral-dark:#031B2D;
+    --nav-text:#073E65;
+    --line: rgba(4,37,60,0.22);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg-dark);
+    color:var(--ivory);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img{display:block;max-width:100%;}
+
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+    font-size:0.72rem;
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  ::selection{background:var(--coral);color:var(--ivory);}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--gold-soft);
+    outline-offset:3px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:1000;
+    background:rgba(255,255,255,0.38);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    border-bottom:1px solid rgba(255,255,255,0.4);
+    transition:background .4s ease, border-color .4s ease;
+  }
+  header.scrolled{
+    background:rgba(255,255,255,0.55);
+    border-bottom:1px solid rgba(255,255,255,0.6);
+  }
+
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 32px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+
+  .logo{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.5rem;
+    font-weight:600;
+    letter-spacing:0.03em;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .logo .mark{color:var(--gold);font-style:italic;font-size:1.1rem;}
+  .logo img{
+    height:58px;
+    width:auto;
+    display:block;
+    filter:drop-shadow(0 2px 8px rgba(0,0,0,0.35));
+  }
+  footer .logo img{height:52px;}
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:38px;
+  }
+
+  .nav-links a{
+    font-size:0.86rem;
+    letter-spacing:0.04em;
+    color:var(--blush);
+    position:relative;
+    padding:4px 0;
+    transition:color .25s ease;
+  }
+  .nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:-2px;
+    width:0%;height:1px;
+    background:var(--gold);
+    transition:width .3s ease;
+  }
+  .nav-links a:hover, .nav-links a.active{color:var(--gold-soft);}
+  .nav-links a:hover::after, .nav-links a.active::after{width:100%;}
+
+  .cta-nav{
+    background:var(--coral);
+    color:#fff !important;
+    padding:12px 26px !important;
+    border-radius:2px;
+    font-weight:500;
+    font-size:0.82rem !important;
+    letter-spacing:0.05em;
+    box-shadow:0 6px 20px -6px rgba(30,138,114,0.55);
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease !important;
+  }
+  .cta-nav::after{display:none;}
+  .cta-nav:hover{
+    background:var(--coral-dark) !important;
+    transform:translateY(-2px);
+    box-shadow:0 10px 26px -6px rgba(30,138,114,0.7);
+    color:#fff !important;
+  }
+
+  /* ---------- HERO ---------- */
+  #inicio{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:90px;
+    overflow:hidden;
+  }
+
+  .xv-numeral{
+    position:absolute;
+    right:-40px;
+    top:50%;
+    transform:translateY(-50%);
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:min(48vw,640px);
+    line-height:1;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(31,92,82,0.16);
+    z-index:0;
+    pointer-events:none;
+    user-select:none;
+  }
+
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
+    align-items:center;
+    width:100%;
+  }
+
+  .hero-copy .eyebrow{margin-bottom:22px;display:block;}
+
+  .hero-copy h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.6rem);
+    line-height:1.06;
+    color:var(--ivory);
+    margin-bottom:26px;
+  }
+  .hero-copy h1 em{
+    font-style:italic;
+    color:var(--gold-soft);
+  }
+  .hero-copy h1 .hero-word{
+    font-size:1.12em;
+    display:inline-block;
+    line-height:0.92;
+  }
+
+  .hero-copy p{
+    font-size:1.05rem;
+    line-height:1.7;
+    color:rgba(32,48,44,0.72);
+    max-width:460px;
+    margin-bottom:38px;
+  }
+
+  .hero-actions{display:flex;gap:18px;flex-wrap:wrap;}
+
+  .btn-primary{
+    background:var(--coral);
+    color:#fff;
+    padding:16px 34px;
+    font-size:0.86rem;
+    letter-spacing:0.05em;
+    border-radius:2px;
+    display:inline-block;
+    transition:all .25s ease;
+    box-shadow:0 8px 24px -8px rgba(30,138,114,0.5);
+  }
+  .btn-primary:hover{background:var(--coral-dark);transform:translateY(-2px);}
+
+  .btn-ghost{
+    border:1px solid var(--line);
+    color:var(--blush);
+    padding:16px 34px;
+    font-size:0.86rem;
+    letter-spacing:0.05em;
+    border-radius:2px;
+    transition:all .25s ease;
+  }
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-soft);}
+
+  .hero-visual{
+    position:relative;
+    aspect-ratio:3/4;
+    border-radius:2px;
+    overflow:hidden;
+    box-shadow:0 40px 80px -30px rgba(20,40,36,0.35);
+    touch-action:pan-y;
+  }
+  .hero-visual .carousel-slide{
+    position:absolute;inset:0;
+    width:100%;height:100%;object-fit:cover;
+    filter:saturate(1.05) contrast(1.02);
+    opacity:0;
+    transition:opacity 1s ease;
+    z-index:0;
+    pointer-events:none;
+  }
+  .hero-visual .carousel-slide.active{opacity:1;}
+  .hero-visual::before{
+    content:'';
+    position:absolute;inset:0;
+    border:1px solid var(--gold);
+    outline:1px solid rgba(0,0,0,0.2);
+    outline-offset:-14px;
+    z-index:2;
+    pointer-events:none;
+  }
+  .hero-visual::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(20,40,36,0) 55%, rgba(20,40,36,0.55) 100%);
+    z-index:1;
+    pointer-events:none;
+  }
+  .carousel-dots{
+    position:absolute;
+    bottom:22px;left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:8px;
+    z-index:3;
+  }
+  .carousel-dots span{
+    width:6px;height:6px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.45);
+    transition:background .3s ease, transform .3s ease;
+  }
+  .carousel-dots span.active{background:#fff;transform:scale(1.25);}
+
+  .scroll-cue{
+    position:absolute;
+    bottom:36px;
+    left:32px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:0.72rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:rgba(32,48,44,0.5);
+    z-index:2;
+  }
+  .scroll-cue .line{
+    width:36px;height:1px;
+    background:rgba(32,48,44,0.4);
+    animation:pulseLine 2.2s ease-in-out infinite;
+  }
+  @keyframes pulseLine{
+    0%,100%{transform:scaleX(1);opacity:0.5;}
+    50%{transform:scaleX(1.4);opacity:1;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{
+    padding:130px 0;
+    position:relative;
+  }
+  .section-head{
+    max-width:640px;
+    margin-bottom:74px;
+  }
+  .section-head .eyebrow{margin-bottom:18px;display:block;}
+  .section-head h2{
+    font-size:clamp(2.1rem, 3.6vw, 3.1rem);
+    line-height:1.1;
+    color:var(--ivory);
+  }
+  .section-head h2 em{font-style:italic;color:var(--gold-soft);}
+  .section-head p{
+    margin-top:20px;
+    color:rgba(32,48,44,0.65);
+    font-size:1rem;
+    line-height:1.7;
+  }
+
+  .divider-ornament{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    color:var(--gold);
+    margin-bottom:20px;
+  }
+  .divider-ornament .diamond{
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+  .divider-ornament .rule{
+    flex:1;max-width:80px;
+    height:1px;background:var(--line);
+  }
+
+  /* reveal animation */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- PROCESO ---------- */
+  #proceso{background:linear-gradient(180deg, var(--bg-dark) 0%, var(--surface) 100%);}
+
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+    border-top:1px solid var(--line);
+  }
+  .step{
+    padding:40px 28px 0;
+    border-right:1px solid var(--line);
+    position:relative;
+  }
+  .step:last-child{border-right:none;}
+  .step .roman{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:2.6rem;
+    color:var(--gold);
+    display:block;
+    margin-bottom:22px;
+  }
+  .step h3{
+    font-size:1.3rem;
+    color:var(--ivory);
+    margin-bottom:14px;
+    font-weight:500;
+  }
+  .step p{
+    font-size:0.92rem;
+    line-height:1.65;
+    color:rgba(32,48,44,0.6);
+  }
+
+  /* ---------- PORTAFOLIO ---------- */
+  #portafolio{background:var(--surface);}
+
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  .gallery figure{
+    position:relative;
+    overflow:hidden;
+    border-radius:2px;
+    cursor:pointer;
+    margin:0;
+    aspect-ratio:4/3;
+  }
+  .gallery img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    transition:transform .7s cubic-bezier(.2,.7,.3,1), filter .5s ease;
+    filter:saturate(0.92) contrast(1.02);
+  }
+  .gallery figure:hover img{transform:scale(1.05);filter:saturate(1.1) contrast(1.05);}
+  .portfolio-complete-wrap{
+    display:flex;
+    justify-content:center;
+    margin-top:34px;
+  }
+
+  .lightbox{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(4,37,60,0.94);
+    z-index:3000;
+    align-items:center;
+    justify-content:center;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{
+    max-width:88vw;
+    max-height:86vh;
+    object-fit:contain;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,0.6);
+  }
+  .lightbox-close{
+    position:absolute;
+    top:24px;right:28px;
+    background:none;border:1px solid rgba(255,255,255,0.4);
+    color:#fff;
+    width:40px;height:40px;
+    border-radius:50%;
+    font-size:1rem;
+    cursor:pointer;
+    transition:all .25s ease;
+  }
+  .lightbox-close:hover{background:rgba(255,255,255,0.12);}
+  .lightbox-nav{
+    position:absolute;
+    top:50%;transform:translateY(-50%);
+    background:none;border:1px solid rgba(255,255,255,0.4);
+    color:#fff;
+    width:48px;height:48px;
+    border-radius:50%;
+    font-size:1.5rem;
+    cursor:pointer;
+    transition:all .25s ease;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lightbox-nav:hover{background:rgba(255,255,255,0.12);}
+  .lightbox-prev{left:20px;}
+  .lightbox-next{right:20px;}
+
+  /* ---------- TESTIMONIOS ---------- */
+  #testimonios{
+    background:linear-gradient(180deg, var(--surface) 0%, var(--bg-dark) 100%);
+    overflow:hidden;
+  }
+  .testimonials-head{
+    margin-bottom:54px;
+  }
+  .testimonials-carousel{
+    position:relative;
+    display:grid;
+    grid-template-columns:52px minmax(0,1fr) 52px;
+    gap:18px;
+    align-items:center;
+  }
+  .testimonial-track{
+    display:grid;
+    grid-template-columns:1fr 1.12fr 1fr;
+    gap:20px;
+    align-items:stretch;
+  }
+  .testimonial-card{
+    background:rgba(255,255,255,0.28);
+    border:1px solid rgba(4,37,60,0.12);
+    border-radius:18px;
+    padding:30px 28px;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    min-height:430px;
+    transition:transform .35s ease, opacity .35s ease, box-shadow .35s ease, background .35s ease;
+  }
+  .testimonial-card.side{
+    opacity:.68;
+    transform:scale(.94);
+  }
+  .testimonial-card.main{
+    background:rgba(255,255,255,0.52);
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 22px 50px -28px rgba(4,37,60,.45);
+    border-color:rgba(4,37,60,.22);
+  }
+  .testimonial-avatar{
+    width:86px;
+    height:86px;
+    border-radius:50%;
+    object-fit:cover;
+    margin:0 0 14px;
+    border:3px solid rgba(255,255,255,.72);
+    box-shadow:0 8px 24px -14px rgba(4,37,60,.55);
+  }
+  .testimonial-card.main .testimonial-avatar{
+    width:102px;
+    height:102px;
+  }
+  .testimonial-name{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.48rem;
+    color:var(--ivory);
+    margin-bottom:2px;
+  }
+  .testimonial-role{
+    min-height:20px;
+    font-family:'Jost', sans-serif;
+    font-size:.72rem;
+    letter-spacing:.08em;
+    color:rgba(4,37,60,.56);
+    margin-bottom:16px;
+  }
+  .testimonial-text{
+    font-size:.9rem;
+    line-height:1.62;
+    color:rgba(32,48,44,.74);
+    margin:0;
+    text-align:left;
+  }
+  .testimonial-card.main .testimonial-text{
+    font-size:.96rem;
+    color:rgba(32,48,44,.84);
+  }
+  .testimonial-arrow{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid rgba(4,37,60,.28);
+    background:rgba(255,255,255,.36);
+    color:var(--gold);
+    font-family:'Cormorant Garamond', serif;
+    font-size:2rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .testimonial-arrow:hover{
+    transform:scale(1.06);
+    background:rgba(255,255,255,.62);
+  }
+
+  /* ---------- PLANES ---------- */
+  #planes{background:linear-gradient(180deg, var(--surface) 0%, var(--bg-dark) 100%);}
+
+  .plan-builder{max-width:920px;}
+
+  .builder-group{margin-bottom:56px;}
+  .builder-group h3{
+    font-size:1.4rem;
+    color:var(--ivory);
+    margin-bottom:8px;
+    font-weight:500;
+  }
+  .builder-hint{
+    font-size:0.85rem;
+    color:rgba(32,48,44,0.55);
+    margin-bottom:22px;
+  }
+
+  .option-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+
+  .option-btn{
+    flex:1 1 220px;
+    text-align:left;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:22px 24px;
+    cursor:pointer;
+    font-family:'Jost', sans-serif;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    transition:all .25s ease;
+    position:relative;
+  }
+  .option-btn:hover{border-color:var(--gold);transform:translateY(-2px);}
+  .option-btn .opt-name{
+    font-size:0.96rem;
+    color:var(--ivory);
+    font-weight:500;
+  }
+  .option-btn .opt-price{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.6rem;
+    color:var(--gold);
+  }
+  .option-btn .opt-note{
+    font-size:0.72rem;
+    color:rgba(32,48,44,0.5);
+    letter-spacing:0.01em;
+  }
+  .option-btn.active{
+    background:var(--surface-2);
+    border-color:var(--coral);
+    box-shadow:inset 0 0 0 1px var(--coral);
+  }
+  .option-btn.active .opt-price{color:var(--coral);}
+  .option-btn.active::after{
+    content:'✓';
+    position:absolute;
+    top:14px;right:16px;
+    width:20px;height:20px;
+    border-radius:50%;
+    background:var(--coral);
+    color:#fff;
+    font-size:0.68rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  .plan-summary{
+    background:var(--surface);
+    border:1px solid var(--line);
+    padding:44px;
+    margin-top:12px;
+  }
+  .plan-summary h3{
+    font-size:1.4rem;
+    color:var(--ivory);
+    margin-bottom:22px;
+    font-weight:500;
+  }
+  .summary-list{margin-bottom:6px;}
+  .summary-list li{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    font-size:0.92rem;
+    color:rgba(32,48,44,0.75);
+    padding:12px 0;
+    border-bottom:1px solid rgba(4,37,60,0.12);
+  }
+  .summary-list li span:last-child{
+    color:var(--ivory);
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .summary-list .summary-empty{
+    justify-content:flex-start;
+    font-style:italic;
+    color:rgba(32,48,44,0.45);
+    border-bottom:none;
+  }
+  .summary-total{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding-top:22px;
+    margin-top:12px;
+    border-top:1px solid var(--line);
+    font-family:'Cormorant Garamond', serif;
+  }
+  .summary-total span:first-child{
+    font-size:1rem;
+    font-family:'Jost',sans-serif;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:rgba(32,48,44,0.6);
+  }
+  .summary-total span:last-child{
+    font-size:2.2rem;
+    color:var(--coral);
+  }
+  .summary-cta{
+    display:block;
+    text-align:center;
+    margin-top:30px;
+    width:100%;
+  }
+  .summary-cta.disabled{
+    opacity:0.4;
+    pointer-events:none;
+  }
+
+  @media (max-width:600px){
+    .option-btn{flex:1 1 100%;}
+    .plan-summary{padding:32px 24px;}
+  }
+
+  /* ---------- SIMÓN ---------- */
+  #simon{background:var(--bg-dark);}
+  .simon-grid{
+    display:grid;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:70px;
+    align-items:center;
+  }
+  .simon-photo{
+    position:relative;
+    aspect-ratio:4/5;
+    overflow:hidden;
+    border-radius:2px;
+  }
+  .simon-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(0.15) contrast(1.05);}
+  .simon-photo::before{
+    content:'';
+    position:absolute;inset:0;
+    border:1px solid var(--gold);
+    outline:1px solid rgba(0,0,0,0.2);
+    outline-offset:-14px;
+  }
+  .simon-quote{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.6rem, 2.6vw, 2.2rem);
+    line-height:1.4;
+    color:var(--ivory);
+    margin-bottom:30px;
+  }
+  .simon-quote::before{content:'“';color:var(--gold);}
+  .simon-quote::after{content:'”';color:var(--gold);}
+
+  .simon-copy p.bio{
+    color:rgba(32,48,44,0.68);
+    line-height:1.8;
+    margin-bottom:30px;
+    max-width:520px;
+  }
+
+  .simon-stats{
+    display:flex;
+    gap:48px;
+    margin-top:8px;
+    flex-wrap:wrap;
+  }
+  .simon-stats div strong{
+    display:block;
+    font-family:'Cormorant Garamond', serif;
+    font-size:2.2rem;
+    color:var(--gold-soft);
+  }
+  .simon-stats div span{
+    font-size:0.76rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:rgba(32,48,44,0.5);
+  }
+  .simon-stats .stat-phrase{
+    max-width:170px;
+  }
+  .simon-stats .stat-phrase strong{
+    width:34px;height:34px;
+    border-radius:50%;
+    background:var(--coral);
+    color:#fff;
+    font-family:'Jost',sans-serif;
+    font-size:0.9rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:10px;
+  }
+  .simon-stats .stat-phrase span{
+    text-transform:none;
+    letter-spacing:0.01em;
+    line-height:1.5;
+    font-size:0.82rem;
+    color:rgba(32,48,44,0.7);
+  }
+  .simon-cta{
+    display:inline-block;
+    margin-top:36px;
+  }
+
+  /* ---------- CONTACTO ---------- */
+  #contacto{
+    background:var(--surface);
+    text-align:center;
+    padding:150px 0;
+  }
+  #contacto .eyebrow{justify-content:center;display:flex;margin-bottom:22px;}
+  #contacto h2{
+    font-size:clamp(2.2rem, 5vw, 3.6rem);
+    max-width:760px;
+    margin:0 auto 26px;
+    line-height:1.12;
+  }
+  #contacto h2 em{font-style:italic;color:var(--gold-soft);}
+  #contacto p.sub{
+    color:rgba(32,48,44,0.65);
+    max-width:480px;
+    margin:0 auto 44px;
+    line-height:1.7;
+  }
+  .contact-actions{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--bg-dark);
+    border-top:1px solid var(--line);
+    padding:36px 0 20px;
+  }
+  .footer-inner{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:12px;
+  }
+  .footer-inner .logo img{height:38px;}
+  footer p{color:rgba(32,48,44,0.5);font-size:0.82rem;max-width:420px;line-height:1.5;margin:0 auto;}
+  .footer-bottom{
+    margin-top:20px;
+    padding-top:16px;
+    border-top:1px solid rgba(4,37,60,0.1);
+    font-size:0.72rem;
+    color:rgba(32,48,44,0.4);
+    text-align:center;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .hero-inner{grid-template-columns:1fr;gap:48px;}
+    .hero-visual{max-width:420px;order:-1;}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .step{border-bottom:1px solid var(--line);padding-bottom:34px;}
+    .step:nth-child(2){border-right:none;}
+    .step:nth-child(4){border-right:none;}
+    .simon-grid{grid-template-columns:1fr;}
+    .simon-photo{max-width:340px;}
+    .testimonial-track{gap:12px;}
+    .testimonial-card{padding:24px 18px;min-height:450px;}
+  }
+
+  @media (max-width:760px){
+    .nav-links{
+      gap:0;
+    }
+    .nav-links li{display:none;}
+    .nav-links li:has(.cta-nav){display:block;}
+    .cta-nav{padding:11px 20px !important;font-size:0.78rem !important;}
+    .burger{display:none;}
+    .gallery{grid-template-columns:repeat(2,1fr);gap:10px;}
+    .testimonials-carousel{grid-template-columns:32px minmax(0,1fr) 32px;gap:6px;}
+    .testimonial-track{grid-template-columns:.42fr 3.16fr .42fr;gap:6px;align-items:start;}
+    .testimonial-card{min-height:0;height:auto;padding:16px 16px;border-radius:14px;justify-content:flex-start;}
+    .testimonial-card.side{opacity:.5;transform:scale(.9);overflow:hidden;align-items:center;padding:16px 7px;}
+    .testimonial-card.side .testimonial-avatar{width:52px;height:52px;margin-bottom:10px;}
+    .testimonial-card.side .testimonial-name{font-size:.9rem;white-space:nowrap;}
+    .testimonial-card.side .testimonial-role{font-size:.56rem;text-align:center;line-height:1.3;}
+    .testimonial-card.side .testimonial-text{display:none;}
+    .testimonial-card.main{transform:translateY(-4px) scale(1);}
+    .testimonial-card.main .testimonial-avatar{width:76px;height:76px;margin-bottom:10px;}
+    .testimonial-card.main .testimonial-name{font-size:1.38rem;}
+    .testimonial-card.main .testimonial-role{font-size:.58rem;margin-bottom:9px;}
+    .testimonial-card.main .testimonial-text{font-size:.72rem;line-height:1.42;text-align:left;}
+    .testimonial-arrow{width:32px;height:32px;font-size:1.45rem;}
+    .lightbox-nav{width:38px;height:38px;font-size:1.2rem;}
+    .lightbox-prev{left:8px;}
+    .lightbox-next{right:8px;}
+    .lightbox-close{top:14px;right:14px;width:34px;height:34px;}
+    .xv-numeral{display:none;}
+    section{padding:90px 0;}
+    .footer-inner{flex-direction:column;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#inicio" class="logo"><img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1775329971/logo_para_web_oflm4x.png" alt="Simón Fotografía"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+      <li><a href="#portafolio">Portafolio</a></li>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#simon">Simón</a></li>
+      <li><a href="#contacto" class="cta-nav">Contáctanos ahora</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- INICIO -->
+  <section id="inicio">
+    <span class="xv-numeral">XV</span>
+    <div class="wrap hero-inner">
+      <div class="hero-copy reveal in">
+        <h1>Tus <em class="hero-word">quince</em>, contados tan <em class="hero-word">auténticos</em> como <em class="hero-word">tú</em>.</h1>
+        <p>Las sesiones conmigo son un parche, con la intención de hacerte reír un montón y que las fotos fluyan tan auténticas como tú. Eso es lo diferente de las fotos de tus quince: que nadie más puede ser como tú y que nadie lo va a capturar mejor que yo.</p>
+        <div class="hero-actions">
+          <a href="https://wa.me/573195706981?text=Hola%20Sim%C3%B3n%2C%20%C2%BFc%C3%B3mo%20est%C3%A1s%3F%20Me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20de%2015s%20contigo." class="btn-primary" target="_blank" rel="noopener">¿Te atreves?</a>
+        </div>
+      </div>
+      <div class="hero-visual" id="heroCarousel"></div>
+    </div>
+    <div class="scroll-cue"><span class="line"></span> Desliza</div>
+  </section>
+
+  <!-- PROCESO -->
+  <section id="proceso">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Cuatro pasos, <em>un solo</em> recuerdo.</h2>
+        <p>Siempre sigo estos pasos para que te veas auténtica y sientas las fotos propias. Primero conectemos para que todo fluya mucho mejor.</p>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <span class="roman">I</span>
+          <h3>Primero, conozcámonos</h3>
+          <p>Tomemos un cafecito o hagamos una videollamada para definir la locación que más va con tu estilo, un look que vaya con tu mejor versión y el mejor horario posible.</p>
+        </div>
+        <div class="step">
+          <span class="roman">II</span>
+          <h3>La sesión</h3>
+          <p>La sesión es para que nos divirtamos: yo buscando la mejor luz para enmarcar tu belleza, buscando historias divertidas para contarte, y tú divirtiéndote siendo tú, la mejor y más auténtica versión de ti.</p>
+        </div>
+        <div class="step">
+          <span class="roman">III</span>
+          <h3>El día del evento</h3>
+          <p>Este día es para que te diviertas con tus amigos y tu familia. Las fotos posadas van a ser pocas, tal vez algunas con la decoración y al inicio del día, pero en general yo voy a capturar esos momentos en los que disfrutas de forma espontánea.</p>
+        </div>
+        <div class="step">
+          <span class="roman">IV</span>
+          <h3>Entrega</h3>
+          <p>Te entrego algunas foticos en digital para que puedas publicar fotos hermosas el mismo día de tu fiesta y, luego de unos días, un libro hermoso que vas a querer atesorar para recordar esta versión tan bella de ti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section id="testimonios">
+    <div class="wrap">
+      <div class="section-head testimonials-head reveal">
+        <h2>Testimonios.</h2>
+        <p>Lo que algunos de mis clientes valoran más de mi trabajo.</p>
+      </div>
+
+      <div class="testimonials-carousel reveal" aria-roledescription="carrusel" aria-label="Testimonios de clientes">
+        <button class="testimonial-arrow testimonial-prev" id="testimonialPrev" type="button" aria-label="Ver testimonios anteriores">‹</button>
+        <div class="testimonial-track" id="testimonialTrack" aria-live="polite"></div>
+        <button class="testimonial-arrow testimonial-next" id="testimonialNext" type="button" aria-label="Ver testimonios siguientes">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAFOLIO -->
+  <section id="portafolio">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Algunas <em>quinces</em> recientes.</h2>
+        <p>Una muestra de sesiones reales — cada una con su propia locación, luz y personalidad.</p>
+      </div>
+      <div class="gallery reveal" id="galleryGrid"></div>
+      <div class="portfolio-complete-wrap reveal">
+        <a href="portafolio-completo.html" class="btn-ghost">Portafolio completo</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">✕</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Foto anterior">‹</button>
+    <img src="" alt="" id="lightboxImg">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Foto siguiente">›</button>
+  </div>
+
+  <!-- PLANES -->
+  <section id="planes">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Personaliza <em>tu</em> experiencia.</h2>
+        <p>Como yo sé que no todas las chicas quieren las mismas cosas, sino que cada una es única, tiene gustos y fiestas diferentes, dejo que seas tú la que decide cómo quiere las fotos de 15s.</p>
+      </div>
+
+      <div class="plan-builder reveal">
+
+        <div class="builder-group">
+          <h3>Cubrimiento de evento de 15 años</h3>
+          <p class="builder-hint">Elige una opción</p>
+          <div class="option-grid" data-group="hours">
+            <button type="button" class="option-btn" data-group="hours" data-id="h5" data-name="Galería digital 5 horas" data-price="1000000">
+              <span class="opt-name">5 horas</span>
+              <span class="opt-price">$1.000.000</span>
+            </button>
+            <button type="button" class="option-btn" data-group="hours" data-id="h7" data-name="Galería digital 7 horas" data-price="1200000">
+              <span class="opt-name">7 horas</span>
+              <span class="opt-price">$1.200.000</span>
+            </button>
+            <button type="button" class="option-btn" data-group="hours" data-id="hfull" data-name="Galería digital full time" data-price="1400000">
+              <span class="opt-name">Full time</span>
+              <span class="opt-price">$1.400.000</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="builder-group">
+          <h3>Book premium en eco cuero</h3>
+          <p class="builder-hint">Elige una opción</p>
+          <div class="option-grid" data-group="book">
+            <button type="button" class="option-btn" data-group="book" data-id="b20" data-name="Book premium eco cuero 20 páginas" data-price="400000">
+              <span class="opt-name">20 páginas</span>
+              <span class="opt-price">$400.000</span>
+            </button>
+            <button type="button" class="option-btn" data-group="book" data-id="b26" data-name="Book premium eco cuero 26 páginas + caja de eco cuero de lujo" data-price="500000">
+              <span class="opt-name">26 páginas + caja de eco cuero de lujo</span>
+              <span class="opt-price">$500.000</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="builder-group">
+          <h3>Sesiones fotográficas de 15 años</h3>
+          <p class="builder-hint">Elige una o las dos — el precio cambia si ya elegiste un plan de horas arriba</p>
+          <div class="option-grid" data-group="extras">
+            <button type="button" class="option-btn" data-group="extras" data-id="pre15" data-name="Sesión pre-15s con retablo grande" data-price-with="350000" data-price-without="430000">
+              <span class="opt-name">Sesión pre-15s con retablo grande</span>
+              <span class="opt-price">$430.000</span>
+              <span class="opt-note">$350.000 si ya elegiste un plan de horas</span>
+            </button>
+            <button type="button" class="option-btn" data-group="extras" data-id="vestido15" data-name="Sesión con vestido de 15s y retablo grande" data-price-with="350000" data-price-without="430000">
+              <span class="opt-name">Sesión con vestido de 15s y retablo grande</span>
+              <span class="opt-price">$430.000</span>
+              <span class="opt-note">$350.000 si ya elegiste un plan de horas</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="plan-summary" id="planSummary">
+          <h3>Tu plan</h3>
+          <ul class="summary-list" id="summaryList">
+            <li class="summary-empty">Todavía no has elegido nada — selecciona tus opciones arriba.</li>
+          </ul>
+          <div class="summary-total">
+            <span>Total</span>
+            <span id="summaryTotal">$0</span>
+          </div>
+          <a href="#" id="planCtaBtn" class="btn-primary summary-cta disabled" target="_blank" rel="noopener">Escojo este plan</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMÓN -->
+  <section id="simon">
+    <div class="wrap simon-grid">
+      <div class="simon-photo reveal">
+        <img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786243712/IMG_9078_zzyhmn.jpg" alt="Retrato del fotógrafo Simón">
+      </div>
+      <div class="simon-copy reveal">
+        <p class="simon-quote">Cada quinceañera merece verse en sus fotos como se siente ese día: grande, segura y ella misma.</p>
+        <p class="bio">Soy Simón. El que se va a dirigir la sesión haciéndote reír un montón. En general, siempre voy a intentar buscar la mejor forma de hacerte sentir auténtica. Por lo demás, creo que mis fotos y los testimonios de mis anteriores clientes ya hablan por mí.</p>
+        <div class="simon-stats">
+          <div><strong>5+</strong><span>Años de experiencia</span></div>
+          <div class="stat-phrase"><strong>✓</strong><span>Todas las quinceañeras están felices con sus fotos</span></div>
+        </div>
+        <a href="https://wa.me/573195706981?text=Hola%20Sim%C3%B3n%2C%20quiero%20contarte%20un%20poco%20de%20m%C3%AD%20para%20mi%20sesi%C3%B3n%20de%2015s." class="btn-ghost simon-cta" target="_blank" rel="noopener">Cuéntame de ti</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="wrap">
+      <h2>Cuéntame la idea para <em>tus</em> quinces.</h2>
+      <p class="sub">Quiero que me cuentes de ti, de tu autenticidad y cuál es el sueño que quieres que yo plasme en tus fotos. Podemos hacerlo en una llamadita o un cafecito. ¡Escríbeme!</p>
+      <div class="contact-actions">
+        <a href="https://wa.me/573195706981?text=Quiero%20que%20me%20ayudes%20a%20guardar%20el%20sue%C3%B1o%20de%20mis%2015s." class="btn-primary" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a href="#inicio" class="logo"><img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1775329971/logo_para_web_oflm4x.png" alt="Simón Fotografía"></a>
+    <p>Fotografía de 15 años en El Oriente Antioqueño y Colombia. Sesiones donde las fotos son tan auténticas como tú.</p>
+  </div>
+  <div class="footer-bottom">© 2022 Simón Castro Fotógrafo. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+  // hero carousel
+  (function(){
+    const heroImages = [
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786160058/15s_dulce-44_nsyxm6.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786160056/15s_dulce-3_y52moq.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786160056/15s_dulce-42_nmjcph.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159762/1mariana-12_whv4yp.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159762/1mariana-9_vciuwt.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159761/1mariana-8_il9ekd.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159761/1mariana-10_l21txs.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159761/1mariana-4_odfgk3.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159720/DSC06590_f5vfds.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159714/DSC06915_yobqox.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159714/DSC06959_k9shu0.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159714/DSC06879_xiwnhl.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159713/DSC06963_oe5pqi.jpg',
+      'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1786159713/DSC06440_czofkx.jpg'
+    ];
+
+    const container = document.getElementById('heroCarousel');
+    if(!container) return;
+
+    heroImages.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Sesión de XV años · foto ' + (i + 1);
+      img.className = 'carousel-slide' + (i === 0 ? ' active' : '');
+      img.loading = i === 0 ? 'eager' : 'lazy';
+      container.appendChild(img);
+    });
+
+    const dots = document.createElement('div');
+    dots.className = 'carousel-dots';
+    heroImages.forEach((_, i) => {
+      const d = document.createElement('span');
+      if(i === 0) d.classList.add('active');
+      dots.appendChild(d);
+    });
+    container.appendChild(dots);
+
+    const slides = container.querySelectorAll('.carousel-slide');
+    const dotEls = dots.querySelectorAll('span');
+    let current = 0;
+    let timer = null;
+
+    function goTo(index){
+      slides[current].classList.remove('active');
+      dotEls[current].classList.remove('active');
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dotEls[current].classList.add('active');
+    }
+
+    function next(){ goTo(current + 1); }
+
+    function startAutoplay(){
+      clearInterval(timer);
+      timer = setInterval(next, 3000);
+    }
+    startAutoplay();
+
+    // swipe support (móvil y pantallas táctiles)
+    let touchStartX = 0;
+    let touchDeltaX = 0;
+
+    container.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchDeltaX = 0;
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e) => {
+      touchDeltaX = e.touches[0].clientX - touchStartX;
+    }, { passive: true });
+
+    container.addEventListener('touchend', () => {
+      if(Math.abs(touchDeltaX) > 40){
+        if(touchDeltaX < 0){ goTo(current + 1); } else { goTo(current - 1); }
+        startAutoplay();
+      }
+    });
+  })();
+
+  // header shadow on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // plan builder
+  (function(){
+    const state = { hours: null, book: null, extras: new Set() };
+
+    const optionBtns = document.querySelectorAll('.option-btn');
+    const summaryList = document.getElementById('summaryList');
+    const summaryTotal = document.getElementById('summaryTotal');
+    const ctaBtn = document.getElementById('planCtaBtn');
+
+    if(!optionBtns.length) return;
+
+    function formatCOP(n){
+      return '$' + n.toLocaleString('es-CO');
+    }
+
+    function extraPrice(btn){
+      const withHours = parseInt(btn.dataset.priceWith, 10);
+      const withoutHours = parseInt(btn.dataset.priceWithout, 10);
+      return state.hours ? withHours : withoutHours;
+    }
+
+    function refreshExtraPrices(){
+      document.querySelectorAll('.option-btn[data-group="extras"]').forEach(btn => {
+        const price = extraPrice(btn);
+        btn.querySelector('.opt-price').textContent = formatCOP(price);
+      });
+    }
+
+    function render(){
+      refreshExtraPrices();
+
+      const items = [];
+
+      if(state.hours){
+        const btn = document.querySelector('.option-btn[data-group="hours"][data-id="' + state.hours + '"]');
+        items.push({ name: btn.dataset.name, price: parseInt(btn.dataset.price, 10) });
+      }
+      if(state.book){
+        const btn = document.querySelector('.option-btn[data-group="book"][data-id="' + state.book + '"]');
+        items.push({ name: btn.dataset.name, price: parseInt(btn.dataset.price, 10) });
+      }
+      state.extras.forEach(id => {
+        const btn = document.querySelector('.option-btn[data-group="extras"][data-id="' + id + '"]');
+        items.push({ name: btn.dataset.name, price: extraPrice(btn) });
+      });
+
+      summaryList.innerHTML = '';
+      if(items.length === 0){
+        summaryList.innerHTML = '<li class="summary-empty">Todavía no has elegido nada — selecciona tus opciones arriba.</li>';
+      } else {
+        items.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = '<span>' + item.name + '</span><span>' + formatCOP(item.price) + '</span>';
+          summaryList.appendChild(li);
+        });
+      }
+
+      const total = items.reduce((sum, it) => sum + it.price, 0);
+      summaryTotal.textContent = formatCOP(total);
+
+      if(items.length === 0){
+        ctaBtn.classList.add('disabled');
+        ctaBtn.href = '#';
+      } else {
+        ctaBtn.classList.remove('disabled');
+        let msg = 'Hola Simón, quiero armar este plan para mi sesión de 15s:\n';
+        items.forEach(item => {
+          msg += '• ' + item.name + ' (' + formatCOP(item.price) + ')\n';
+        });
+        msg += '\nTotal: ' + formatCOP(total);
+        ctaBtn.href = 'https://wa.me/573195706981?text=' + encodeURIComponent(msg);
+      }
+    }
+
+    optionBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.dataset.group;
+        const id = btn.dataset.id;
+
+        if(group === 'extras'){
+          if(state.extras.has(id)){
+            state.extras.delete(id);
+            btn.classList.remove('active');
+          } else {
+            state.extras.add(id);
+            btn.classList.add('active');
+          }
+        } else {
+          const isActive = state[group] === id;
+          document.querySelectorAll('.option-btn[data-group="' + group + '"]').forEach(b => b.classList.remove('active'));
+          if(isActive){
+            state[group] = null;
+          } else {
+            state[group] = id;
+            btn.classList.add('active');
+          }
+        }
+        render();
+      });
+    });
+
+    render();
+  })();
+
+  // testimonios
+  (function(){
+    const testimonials = [
+      {
+        name:'Evelyn',
+        role:'',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368413/2_kluq1j.png',
+        text:'Me encantó tu energía al momento de tomar las fotos. Siempre me hacías sonreír para que salieran más lindas esas fotos. 10/10, buenísimas. Y lo mejor de la experiencia es que por todo me hacías reír; de toda parte sacabas tema para hacerme reír. Por eso todas las fotos quedaron divinas.'
+      },
+      {
+        name:'Mariana',
+        role:'',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368413/1_ydwbrm.png',
+        text:'Simón, quedé muy agradecida por tus fotos. Se siente un ambiente muy agradable cuando estás trabajando. Quedé muy satisfecha con las fotos, con el trabajo y con el libro; todo estuvo súper bien preparado. Te doy mil gracias por cumplirme el sueño que tanto deseaba de pequeña. Un día y un sueño que siempre tuve se hizo realidad gracias a ti.'
+      },
+      {
+        name:'Michell',
+        role:'Mamá de Michell',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368414/5_cgndof.png',
+        text:'Simón, te felicito por ese trabajo tan excelente e impecable que haces. Me dejaste sin palabras, sorprendida con esas fotos tan hermosas. Te voy a recomendar siempre. Tienes mucha paciencia y actitud, eres 100/100. Me encantó que te gusta hacer fotos en todas partes. Estoy súper encantada. Simón, que Dios te bendiga y multiplique tu trabajo. No tengo más palabras para decir lo que siento en este momento. Soy una mamá muy contenta.'
+      },
+      {
+        name:'Mariana',
+        role:'Papá de Mariana',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368413/4_dnfdfc.png',
+        text:'Simón, de verdad que tienes mucho profesionalismo. Es muy difícil encontrar personas que trabajen con tanto amor y dedicación, y eso es lo que te hace un profesional. Qué fotos tan hermosas las que hiciste. Tienes muchísima paciencia y la verdad es que todo estuvo genial.'
+      },
+      {
+        name:'Isabella',
+        role:'',
+        photo:'https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788368413/3_ox4o5i.png',
+        text:'Tuve una experiencia bastante buena. Me encantó la creatividad que tienes para aprovechar los espacios y buscar que cada foto se vea especial y diferente. Eres muy atento, amable y paciente; eso hace que uno se sienta muy cómodo durante la sesión. Se nota muchísimo el profesionalismo, la dedicación y calidad en el trabajo. La atención fue excelente y quedé muy feliz con el resultado. Sin duda fue una experiencia muy bonita. Lo recomiendo un montón por su calidad y, sobre todo, por la excelente persona que es.'
+      }
+    ];
+
+    const track = document.getElementById('testimonialTrack');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
+    if(!track || !prevBtn || !nextBtn) return;
+
+    let current = 0; // Evelyn inicia en el centro
+
+    function card(t, position){
+      const article = document.createElement('article');
+      article.className = `testimonial-card ${position}`;
+      article.innerHTML = `
+        <img class="testimonial-avatar" src="${t.photo}" alt="Foto de ${t.name}" loading="lazy">
+        <h3 class="testimonial-name">${t.name}</h3>
+        <div class="testimonial-role">${t.role || '&nbsp;'}</div>
+        <p class="testimonial-text">${t.text}</p>
+      `;
+      return article;
+    }
+
+    function render(){
+      const prevIndex = (current - 1 + testimonials.length) % testimonials.length;
+      const nextIndex = (current + 1) % testimonials.length;
+      track.innerHTML = '';
+      track.appendChild(card(testimonials[prevIndex], 'side'));
+      track.appendChild(card(testimonials[current], 'main'));
+      track.appendChild(card(testimonials[nextIndex], 'side'));
+    }
+
+    prevBtn.addEventListener('click', () => {
+      current = (current - 1 + testimonials.length) % testimonials.length;
+      render();
+    });
+    nextBtn.addEventListener('click', () => {
+      current = (current + 1) % testimonials.length;
+      render();
+    });
+
+    render();
+  })();
+
+  // portafolio + lightbox
+  (function(){
+    const portfolioImages = [
+      'https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454716/fotografia-quincea%C3%B1os-recinto-quirama-43.jpg',
+      'https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454898/fotografia-quincea%C3%B1os-rionegro-20.jpg',
+      'https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454877/fotografia-quincea%C3%B1os-rionegro-18.jpg',
+      'https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454611/premariana-17-3.jpg',
+      'https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454584/1mariana-2-14.jpg',
+      'https://res.cloudinary.com/ujxv8mdq/image/upload/v1788452625/fotografia-quincea%C3%B1os-llanogrande-3-2.jpg'
+    ];
+
+    const grid = document.getElementById('galleryGrid');
+    if(!grid) return;
+
+    portfolioImages.forEach((src, i) => {
+      const figure = document.createElement('figure');
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Sesión de XV años · foto ' + (i + 1);
+      img.loading = 'lazy';
+      figure.appendChild(img);
+      figure.addEventListener('click', () => openLightbox(i));
+      grid.appendChild(figure);
+    });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const btnClose = document.getElementById('lightboxClose');
+    const btnPrev = document.getElementById('lightboxPrev');
+    const btnNext = document.getElementById('lightboxNext');
+    let currentIndex = 0;
+
+    function openLightbox(i){
+      currentIndex = i;
+      lightboxImg.src = portfolioImages[currentIndex];
+      lightboxImg.alt = 'Sesión de XV años · foto ' + (currentIndex + 1);
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function showDelta(delta){
+      currentIndex = (currentIndex + delta + portfolioImages.length) % portfolioImages.length;
+      lightboxImg.src = portfolioImages[currentIndex];
+      lightboxImg.alt = 'Sesión de XV años · foto ' + (currentIndex + 1);
+    }
+
+    btnClose.addEventListener('click', closeLightbox);
+    btnPrev.addEventListener('click', () => showDelta(-1));
+    btnNext.addEventListener('click', () => showDelta(1));
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showDelta(-1);
+      if(e.key === 'ArrowRight') showDelta(1);
+    });
+  })();
+
+  const navLinks = document.getElementById('navLinks');
+
+  // active link on scroll
+  const sections = document.querySelectorAll('main section[id]');
+  const links = document.querySelectorAll('.nav-links a[href^="#"]');
+  const activeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.getAttribute('id');
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(s => activeObserver.observe(s));
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
