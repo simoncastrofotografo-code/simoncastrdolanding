@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F4EEDD">
+  <title>Página no encontrada — Simón Fotografía</title>
+  <meta name="description" content="Esta página se perdió camino a la sesión de fotos — Simón Fotografía.">
+  <link rel="icon" href="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788406071/6_xbqwe1.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark:#F4EEDD;
+      --surface:#ECE3CC;
+      --surface-2:#E3D6AF;
+      --gold:#04253C;
+      --gold-soft:#04253C;
+      --blush:#073E65;
+      --ivory:#04253C;
+      --coral:#04253C;
+      --coral-dark:#031B2D;
+      --nav-text:#073E65;
+      --line:rgba(4,37,60,.22);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg-dark);
+      color:var(--ivory);
+      font-family:"Jost",sans-serif;
+      font-weight:300;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}
+
+    /* =========================
+       404 HERO
+       ========================= */
+    main{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:60px 0;
+      position:relative;
+      overflow:hidden;
+      text-align:center;
+    }
+
+    .error-numeral{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      font-family:"Cormorant Garamond",serif;
+      font-style:italic;
+      font-size:min(60vw,760px);
+      line-height:1;
+      color:transparent;
+      -webkit-text-stroke:1px rgba(4,37,60,.14);
+      z-index:0;
+      pointer-events:none;
+      user-select:none;
+      white-space:nowrap;
+    }
+
+    .error-inner{
+      position:relative;
+      z-index:2;
+      width:100%;
+      display:flex;
+      justify-content:center;
+    }
+
+    .eyebrow{
+      font-family:"Jost",sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.28em;
+      font-size:.72rem;
+      color:var(--gold);
+      font-weight:500;
+      display:block;
+      margin-bottom:22px;
+    }
+
+    .error-copy{
+      max-width:620px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .error-copy h1{
+      font-family:"Cormorant Garamond",serif;
+      font-weight:500;
+      font-size:clamp(2.3rem,4.6vw,3.8rem);
+      line-height:1.1;
+      color:var(--ivory);
+      margin-bottom:24px;
+    }
+    .error-copy h1 em{
+      font-style:italic;
+      color:var(--gold-soft);
+    }
+
+    .error-copy p{
+      font-size:1.02rem;
+      line-height:1.75;
+      color:rgba(32,48,44,.7);
+      max-width:480px;
+      margin:0 auto 16px;
+    }
+    .error-copy p.small{
+      font-size:.85rem;
+      color:rgba(32,48,44,.5);
+      margin-bottom:38px;
+    }
+    .error-copy p.small code{
+      background:var(--surface-2);
+      padding:2px 8px;
+      border-radius:2px;
+      font-family:monospace;
+      font-size:.82rem;
+      color:var(--ivory);
+    }
+
+    .error-actions{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;}
+
+    .btn-primary{
+      background:var(--coral);
+      color:#fff;
+      padding:16px 34px;
+      font-size:.86rem;
+      letter-spacing:.05em;
+      border-radius:2px;
+      display:inline-block;
+      transition:all .25s ease;
+      box-shadow:0 8px 24px -8px rgba(30,138,114,.5);
+    }
+    .btn-primary:hover{background:var(--coral-dark);transform:translateY(-2px)}
+
+    .btn-ghost{
+      border:1px solid var(--line);
+      color:var(--blush);
+      padding:16px 34px;
+      font-size:.86rem;
+      letter-spacing:.05em;
+      border-radius:2px;
+      transition:all .25s ease;
+    }
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold-soft)}
+
+    /* =========================
+       FOOTER — IGUAL AL RESTO DEL SITIO
+       ========================= */
+    footer{
+      background:var(--bg-dark);
+      border-top:1px solid var(--line);
+      padding:36px 0 20px;
+    }
+    .footer-inner{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:12px;
+    }
+    .footer-inner .logo img{height:38px;width:auto;display:block}
+    footer p{
+      color:rgba(32,48,44,.5);
+      font-size:.82rem;
+      max-width:420px;
+      line-height:1.5;
+      margin:0 auto;
+    }
+    .footer-bottom{
+      margin-top:20px;
+      padding-top:16px;
+      border-top:1px solid rgba(4,37,60,.1);
+      font-size:.72rem;
+      color:rgba(32,48,44,.4);
+      text-align:center;
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (max-width:900px){
+      .error-numeral{display:none}
+      main{padding:40px 0}
+    }
+
+    @media (max-width:480px){
+      .error-copy h1{font-size:2rem}
+      .error-actions{flex-direction:column;align-items:stretch}
+      .error-actions a{text-align:center}
+      footer{padding-top:32px}
+      footer p{font-size:.76rem;max-width:300px}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important}
+      html{scroll-behavior:auto}
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <span class="error-numeral">404</span>
+    <div class="wrap error-inner">
+      <div class="error-copy">
+        <span class="eyebrow">Ups, algo se salió del cuadro</span>
+        <h1>Esta página se fue a bailar el vals <em>sin avisar</em>.</h1>
+        <p>Buscaste una foto, una sesión o una esquina de esta página que ya cambió de vestido o nunca existió. Puede pasar — hasta a las quinceañeras más organizadas se les pierde una invitación.</p>
+        <p class="small">Si llegaste hasta aquí siguiendo un link, revisa que esté bien escrito — el error es código <code>404</code>.</p>
+        <div class="error-actions">
+          <a href="index.html#inicio" class="btn-primary">Volver al inicio</a>
+          <a href="https://wa.me/573195706981?text=Hola%20Sim%C3%B3n%2C%20me%20perd%C3%AD%20buscando%20algo%20en%20tu%20p%C3%A1gina." class="btn-ghost" target="_blank" rel="noopener">Mejor te escribo</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <a href="index.html#inicio" class="logo" aria-label="Volver al inicio">
+        <img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1775329971/logo_para_web_oflm4x.png" alt="Simón Fotografía">
+      </a>
+      <p>Fotografía de 15 años en El Oriente Antioqueño y Colombia. Sesiones donde las fotos son tan auténticas como tú.</p>
+    </div>
+    <div class="footer-bottom">© 2022 Simón Castro Fotógrafo. Todos los derechos reservados.</div>
+  </footer>
+
+</body>
+</html>
