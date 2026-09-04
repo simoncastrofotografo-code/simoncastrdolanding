@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F4EEDD">
+  <title>Mariana — Simón Fotografía</title>
+  <meta name="description" content="Sesión de XV años de Mariana — Simón Fotografía.">
+  <link rel="icon" href="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788406071/6_xbqwe1.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark:#F4EEDD;
+      --surface:#ECE3CC;
+      --surface-2:#E3D6AF;
+      --gold:#04253C;
+      --gold-soft:#04253C;
+      --blush:#073E65;
+      --ivory:#04253C;
+      --coral:#04253C;
+      --coral-dark:#031B2D;
+      --nav-text:#073E65;
+      --line:rgba(4,37,60,.22);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg-dark);
+      color:var(--ivory);
+      font-family:"Jost",sans-serif;
+      font-weight:300;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* =========================
+       NAVBAR — IGUAL A PORTAFOLIO COMPLETO
+       ========================= */
+    .site-header{
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:1000;
+      background:rgba(255,255,255,.38);
+      backdrop-filter:blur(16px) saturate(140%);
+      -webkit-backdrop-filter:blur(16px) saturate(140%);
+      border-bottom:1px solid rgba(255,255,255,.4);
+      transition:background .4s ease,border-color .4s ease;
+    }
+    .site-header.scrolled{
+      background:rgba(255,255,255,.55);
+      border-bottom:1px solid rgba(255,255,255,.6);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 32px;
+      max-width:1180px;
+      margin:0 auto;
+      gap:24px;
+    }
+    .brand{
+      font-family:"Cormorant Garamond",serif;
+      font-size:1.5rem;
+      font-weight:600;
+      letter-spacing:.03em;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-shrink:0;
+    }
+    .brand img{
+      height:58px;
+      width:auto;
+      display:block;
+      filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
+    }
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:38px;
+    }
+    .nav-actions a{
+      font-size:.86rem;
+      letter-spacing:.04em;
+      color:var(--blush);
+      position:relative;
+      padding:4px 0;
+      transition:color .25s ease;
+    }
+    .nav-actions .nav-home::after{
+      content:"";
+      position:absolute;
+      left:0;bottom:-2px;
+      width:0%;height:1px;
+      background:var(--gold);
+      transition:width .3s ease;
+    }
+    .nav-actions .nav-home:hover{color:var(--gold-soft)}
+    .nav-actions .nav-home:hover::after{width:100%}
+    .cta-nav{
+      background:var(--coral);
+      color:#fff!important;
+      padding:12px 26px!important;
+      border-radius:2px;
+      font-weight:500;
+      font-size:.82rem!important;
+      letter-spacing:.05em!important;
+      box-shadow:0 6px 20px -6px rgba(30,138,114,.55);
+      transition:transform .25s ease,box-shadow .25s ease,background .25s ease!important;
+    }
+    .cta-nav::after{display:none}
+    .cta-nav:hover{
+      background:var(--coral-dark)!important;
+      transform:translateY(-2px);
+      box-shadow:0 10px 26px -6px rgba(30,138,114,.7);
+      color:#fff!important;
+    }
+
+    /* =========================
+       GALERÍA COLLAGE
+       ========================= */
+    main{padding-top:94px}
+    .gallery-heading{
+      width:min(1180px,calc(100% - 48px));
+      margin:0 auto;
+      padding:44px 0 34px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:30px;
+    }
+    .gallery-heading .eyebrow{
+      color:var(--blush);
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .gallery-heading h1{
+      color:var(--gold);
+      font-family:"Cormorant Garamond",serif;
+      font-size:clamp(48px,6vw,76px);
+      font-weight:500;
+      line-height:.9;
+      letter-spacing:-.025em;
+    }
+    .gallery-heading p{
+      max-width:360px;
+      color:rgba(32,48,44,.62);
+      font-size:14px;
+      line-height:1.65;
+      text-align:right;
+    }
+
+    /* Galería justificada: conserva la proporción original de cada foto.
+       JavaScript agrupa las imágenes por filas y reparte el ancho sin recortarlas. */
+    .collage{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      background:var(--bg-dark);
+    }
+    .collage-row{
+      display:flex;
+      width:100%;
+      gap:3px;
+      overflow:hidden;
+    }
+    .photo{
+      position:relative;
+      display:block;
+      min-width:0;
+      overflow:hidden;
+      background:#ddd;
+      flex:0 0 auto;
+      cursor:zoom-in;
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:contain;
+      transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .4s ease;
+    }
+    .photo:hover img{transform:scale(1.018)}
+
+    /* =========================
+       LIGHTBOX
+       ========================= */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      z-index:2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(6,12,16,.94);
+      padding:26px 78px;
+    }
+    .lightbox.open{display:flex}
+    .lightbox-image{
+      display:block;
+      max-width:min(94vw,1500px);
+      max-height:90vh;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    .lightbox-nav,.lightbox-close{
+      position:absolute;
+      border:1px solid rgba(255,255,255,.35);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      transition:background .2s ease,transform .2s ease;
+    }
+    .lightbox-nav:hover,.lightbox-close:hover{background:rgba(255,255,255,.18)}
+    .lightbox-nav{
+      top:50%;
+      transform:translateY(-50%);
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      font-size:27px;
+    }
+    .lightbox-nav:hover{transform:translateY(-50%) scale(1.05)}
+    .lightbox-prev{left:18px}
+    .lightbox-next{right:18px}
+    .lightbox-close{
+      top:18px;
+      right:18px;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      font-size:24px;
+    }
+
+    /* =========================
+       BOTÓN VOLVER
+       ========================= */
+    .back-button{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1100;
+      width:50px;
+      height:50px;
+      border:1px solid rgba(4,37,60,.25);
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(244,238,221,.88);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      color:var(--gold);
+      font-size:24px;
+      box-shadow:0 8px 25px rgba(4,37,60,.12);
+      transition:transform .25s ease,background .25s ease,box-shadow .25s ease;
+    }
+    .back-button:hover{
+      transform:translateX(-3px);
+      background:#fff;
+      box-shadow:0 10px 30px rgba(4,37,60,.18);
+    }
+    .back-button span{display:block;line-height:1;transform:translateX(-1px)}
+
+    /* =========================
+       FOOTER — IGUAL AL INDEX
+       ========================= */
+    footer{
+      background:var(--bg-dark);
+      border-top:1px solid var(--line);
+      padding:36px 0 20px;
+    }
+    .wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}
+    .footer-inner{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      gap:12px;
+    }
+    .footer-inner .logo img{height:38px;width:auto;display:block}
+    footer p{
+      color:rgba(32,48,44,.5);
+      font-size:.82rem;
+      max-width:420px;
+      line-height:1.5;
+      margin:0 auto;
+    }
+    .footer-bottom{
+      margin-top:20px;
+      padding-top:16px;
+      border-top:1px solid rgba(4,37,60,.1);
+      font-size:.72rem;
+      color:rgba(32,48,44,.4);
+      text-align:center;
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (max-width:900px){
+      .nav{width:100%;padding:13px 18px;gap:16px}
+      .brand img{height:48px}
+      .nav-actions{gap:14px;margin-left:auto}
+      .nav-actions .nav-home{font-size:.78rem;padding:4px 0}
+      .cta-nav{padding:10px 15px!important;font-size:.68rem!important;white-space:nowrap}
+
+      main{padding-top:74px}
+      .gallery-heading{width:calc(100% - 32px);padding:34px 0 24px;align-items:flex-end}
+      .gallery-heading h1{font-size:56px}
+      .gallery-heading p{font-size:13px;max-width:280px}
+      .collage{gap:3px}
+      .collage-row{gap:3px}
+      .lightbox{padding:18px 54px}
+      .lightbox-nav{width:44px;height:44px;font-size:24px}
+      .lightbox-prev{left:8px}
+      .lightbox-next{right:8px}
+
+      .back-button{right:16px;bottom:16px;width:46px;height:46px;font-size:22px}
+    }
+
+    @media (max-width:480px){
+      .nav{padding:12px 12px}
+      .brand img{height:43px}
+      .nav-actions{gap:10px}
+      .nav-actions .nav-home{font-size:.72rem}
+      .cta-nav{padding:9px 11px!important;font-size:.62rem!important}
+
+      main{padding-top:67px}
+      .gallery-heading{width:calc(100% - 24px);display:block;padding:28px 0 20px}
+      .gallery-heading .eyebrow{font-size:10px;margin-bottom:7px}
+      .gallery-heading h1{font-size:52px}
+      .gallery-heading p{margin-top:12px;max-width:310px;text-align:left;font-size:13px;line-height:1.55}
+      .collage,.collage-row{gap:2px}
+      .lightbox{padding:62px 12px 24px}
+      .lightbox-image{max-width:96vw;max-height:82vh}
+      .lightbox-nav{width:40px;height:40px;font-size:22px;background:rgba(0,0,0,.28)}
+      .lightbox-prev{left:8px}
+      .lightbox-next{right:8px}
+      .lightbox-close{top:12px;right:12px;width:38px;height:38px}
+      .back-button{right:12px;bottom:12px;width:44px;height:44px}
+      footer{padding-top:32px}
+      .wrap{width:calc(100% - 32px)}
+      footer p{font-size:.76rem;max-width:300px}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important}
+      html{scroll-behavior:auto}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="index.html#inicio" aria-label="Volver al inicio de Simón Fotografía">
+        <img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1775329971/logo_para_web_oflm4x.png" alt="Simón Fotografía">
+      </a>
+      <div class="nav-actions">
+        <a class="nav-home" href="index.html#inicio">Inicio</a>
+        <a class="cta-nav" href="https://wa.me/573195706981?text=Hola%20Sim%C3%B3n%2C%20quiero%20cotizar%20una%20sesi%C3%B3n%20de%20XV." target="_blank" rel="noopener">Contáctanos ahora</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery-heading" aria-labelledby="titulo-mariana">
+      <div>
+        <div class="eyebrow">Sesión de XV años</div>
+        <h1 id="titulo-mariana">Mariana.</h1>
+      </div>
+      <p>Una sesión para dejar que las fotos fluyan, disfrutar el momento y guardar esta versión de ti.</p>
+    </section>
+
+    <section class="collage" aria-label="Galería de fotos de Mariana">
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454615/premariana-12-8.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454615/premariana-12-8.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454615/premariana-12-8.jpg" alt="Mariana — fotografía de XV años" loading="eager"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454587/premariana-45-7.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454587/premariana-45-7.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454587/premariana-45-7.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454586/premariana-41-6.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454586/premariana-41-6.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454586/premariana-41-6.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454614/premariana-20-12.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454614/premariana-20-12.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454614/premariana-20-12.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454613/premariana-32-4.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454613/premariana-32-4.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454613/premariana-32-4.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454613/premariana-40-5.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454613/premariana-40-5.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454613/premariana-40-5.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454611/premariana-33-10.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454611/premariana-33-10.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454611/premariana-33-10.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454611/premariana-17-3.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454611/premariana-17-3.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454611/premariana-17-3.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454610/premariana-16-11.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454610/premariana-16-11.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454610/premariana-16-11.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454609/premariana-13-2.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454609/premariana-13-2.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454609/premariana-13-2.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454608/premariana-10-1.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454608/premariana-10-1.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454608/premariana-10-1.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454607/premariana-4-9.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454607/premariana-4-9.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454607/premariana-4-9.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454604/DSC02301-Editar-30.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454604/DSC02301-Editar-30.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454604/DSC02301-Editar-30.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454603/DSC02258-29.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454603/DSC02258-29.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454603/DSC02258-29.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454601/1mariana-20-28.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454601/1mariana-20-28.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454601/1mariana-20-28.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454600/1mariana-19-27.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454600/1mariana-19-27.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454600/1mariana-19-27.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454599/1mariana-18-34.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454599/1mariana-18-34.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454599/1mariana-18-34.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454599/1mariana-17-33.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454599/1mariana-17-33.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454599/1mariana-17-33.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454597/1mariana-16-26.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454597/1mariana-16-26.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454597/1mariana-16-26.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454596/1mariana-15-25.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454596/1mariana-15-25.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454596/1mariana-15-25.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454595/1mariana-14-24.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454595/1mariana-14-24.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454595/1mariana-14-24.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454594/1mariana-12-36.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454594/1mariana-12-36.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454594/1mariana-12-36.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454593/1mariana-11-22.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454593/1mariana-11-22.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454593/1mariana-11-22.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454592/1mariana-10-21.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454592/1mariana-10-21.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454592/1mariana-10-21.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454591/1mariana-9-20.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454591/1mariana-9-20.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454591/1mariana-9-20.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454590/1mariana-8-19.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454590/1mariana-8-19.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454590/1mariana-8-19.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454589/1mariana-7-18.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454589/1mariana-7-18.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454589/1mariana-7-18.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454588/1mariana-6-17.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454588/1mariana-6-17.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454588/1mariana-6-17.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454588/1mariana-4-16.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454588/1mariana-4-16.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454588/1mariana-4-16.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454585/1mariana-1-13.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454585/1mariana-1-13.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454585/1mariana-1-13.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454584/1mariana-2-14.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454584/1mariana-2-14.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454584/1mariana-2-14.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+      <a class="photo" href="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454584/1mariana-3-15.jpg" data-full="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454584/1mariana-3-15.jpg"><img src="https://res.cloudinary.com/ujxv8mdq/image/upload/v1788454584/1mariana-3-15.jpg" alt="Mariana — fotografía de XV años" loading="lazy"></a>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Visualizador de fotografías">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Cerrar">×</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Foto anterior">‹</button>
+    <img class="lightbox-image" id="lightboxImage" src="" alt="Mariana — fotografía de XV años ampliada">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Foto siguiente">›</button>
+  </div>
+
+  <a class="back-button" href="portafolio-completo.html" aria-label="Volver al portafolio completo" title="Volver al portafolio">
+    <span>←</span>
+  </a>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <a href="index.html#inicio" class="logo" aria-label="Volver al inicio">
+        <img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1775329971/logo_para_web_oflm4x.png" alt="Simón Fotografía">
+      </a>
+      <p>Fotografía de 15 años en El Oriente Antioqueño y Colombia. Sesiones donde las fotos son tan auténticas como tú.</p>
+    </div>
+    <div class="footer-bottom">© 2022 Simón Castro Fotógrafo. Todos los derechos reservados.</div>
+  </footer>
+
+  <script>
+    const siteHeader = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      siteHeader.classList.toggle('scrolled', window.scrollY > 40);
+    }, {passive:true});
+
+    // Galería justificada: muestra cada foto completa y mantiene su proporción original.
+    (function(){
+      const gallery = document.querySelector('.collage');
+      if(!gallery) return;
+
+      const photos = Array.from(gallery.querySelectorAll('.photo'));
+      const gap = () => window.innerWidth <= 480 ? 2 : 3;
+      const targetHeight = () => {
+        if(window.innerWidth <= 480) return 175;
+        if(window.innerWidth <= 900) return 235;
+        return Math.max(245, Math.min(355, window.innerWidth * .245));
+      };
+
+      function ratioOf(photo){
+        const img = photo.querySelector('img');
+        if(img.naturalWidth && img.naturalHeight) return img.naturalWidth / img.naturalHeight;
+        return 1.5;
+      }
+
+      function build(){
+        const width = gallery.clientWidth;
+        if(!width) return;
+        const g = gap();
+        const target = targetHeight();
+        const items = [...photos];
+        gallery.innerHTML = '';
+
+        let row = [];
+        let ratioSum = 0;
+
+        function appendRow(rowItems, sum, isLast){
+          const rowEl = document.createElement('div');
+          rowEl.className = 'collage-row';
+          const gapsWidth = g * Math.max(0, rowItems.length - 1);
+          let rowHeight = (width - gapsWidth) / sum;
+          // La última fila no se estira de forma exagerada.
+          if(isLast) rowHeight = Math.min(rowHeight, target * 1.08);
+
+          rowItems.forEach(photo => {
+            const r = ratioOf(photo);
+            photo.style.width = Math.max(1, rowHeight * r) + 'px';
+            photo.style.height = Math.max(1, rowHeight) + 'px';
+            rowEl.appendChild(photo);
+          });
+
+          if(isLast){
+            rowEl.style.justifyContent = 'flex-start';
+          }
+          gallery.appendChild(rowEl);
+        }
+
+        items.forEach((photo, i) => {
+          const r = ratioOf(photo);
+          row.push(photo);
+          ratioSum += r;
+          const projected = ratioSum * target + g * (row.length - 1);
+          const isLastItem = i === items.length - 1;
+
+          if(projected >= width || isLastItem){
+            appendRow(row, ratioSum, isLastItem);
+            row = [];
+            ratioSum = 0;
+          }
+        });
+      }
+
+      let loaded = 0;
+      photos.forEach(photo => {
+        const img = photo.querySelector('img');
+        const done = () => {
+          loaded++;
+          if(loaded === photos.length) build();
+        };
+        if(img.complete) done();
+        else { img.addEventListener('load', done, {once:true}); img.addEventListener('error', done, {once:true}); }
+      });
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(build, 120);
+      });
+
+      // Lightbox con navegación anterior/siguiente.
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const closeBtn = document.getElementById('lightboxClose');
+      const prevBtn = document.getElementById('lightboxPrev');
+      const nextBtn = document.getElementById('lightboxNext');
+      let current = 0;
+
+      function show(index){
+        current = (index + photos.length) % photos.length;
+        lightboxImage.src = photos[current].dataset.full || photos[current].href;
+      }
+      function open(index){
+        show(index);
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }
+      function close(){
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        lightboxImage.src = '';
+      }
+
+      photos.forEach((photo,index) => {
+        photo.addEventListener('click', e => {
+          e.preventDefault();
+          open(index);
+        });
+      });
+      prevBtn.addEventListener('click', () => show(current - 1));
+      nextBtn.addEventListener('click', () => show(current + 1));
+      closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', e => { if(e.target === lightbox) close(); });
+      document.addEventListener('keydown', e => {
+        if(!lightbox.classList.contains('open')) return;
+        if(e.key === 'Escape') close();
+        if(e.key === 'ArrowLeft') show(current - 1);
+        if(e.key === 'ArrowRight') show(current + 1);
+      });
+
+      // Swipe sencillo en celular.
+      let touchX = null;
+      lightbox.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, {passive:true});
+      lightbox.addEventListener('touchend', e => {
+        if(touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        if(Math.abs(dx) > 45) dx > 0 ? show(current - 1) : show(current + 1);
+        touchX = null;
+      }, {passive:true});
+    })();
+  </script>
+</body>
+</html>
