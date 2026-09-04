@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml — Simón Castro Fotografía
+  antes de subir este archivo, y actualiza <lastmod> cuando edites cada página.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://simoncastrofotografo.com/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://simoncastrofotografo.com/portafolio-completo.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://simoncastrofotografo.com/isabella.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://simoncastrofotografo.com/dulce.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!--
+    Agrega aquí una entrada <url> por cada galería nueva que subas
+    (mariana.html, evelyn.html, etc.), copiando el mismo formato de arriba.
+  -->
+
+</urlset>
