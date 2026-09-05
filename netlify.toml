@@ -1,0 +1,23 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Fuerza siempre HTTPS y unifica el dominio en la versión sin "www"
+# (así coincide con el canonical, el sitemap y el schema que usamos: https://simoncastrofotografo.com)
+[[redirects]]
+  from = "http://simoncastrofotografo.com/*"
+  to = "https://simoncastrofotografo.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.simoncastrofotografo.com/*"
+  to = "https://simoncastrofotografo.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.simoncastrofotografo.com/*"
+  to = "https://simoncastrofotografo.com/:splat"
+  status = 301
+  force = true
