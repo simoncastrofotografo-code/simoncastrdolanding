@@ -1,6 +1,0 @@
-# robots.txt — Simón Castro Fotógrafo
-
-User-agent: *
-Allow: /
-
-Sitemap: https://simoncastrofotografo.com/sitemap.xml
