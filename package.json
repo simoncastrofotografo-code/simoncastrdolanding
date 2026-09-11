@@ -1,0 +1,9 @@
+{
+  "name": "simoncastrofotografo-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Sitio de Simón Castro Fotógrafo — dependencias de las funciones de Netlify",
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

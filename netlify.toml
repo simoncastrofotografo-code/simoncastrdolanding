@@ -21,3 +21,11 @@
   to = "https://simoncastrofotografo.com/:splat"
   status = 301
   force = true
+
+# Encabezados de seguridad básicos (no rompen el Pixel de Meta, Cloudinary ni Google Fonts)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"

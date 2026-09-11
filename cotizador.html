@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== META PIXEL — Simón Castro Fotógrafo =====
+     A propósito NO se dispara PageView ni ViewContent automáticos aquí.
+     Esta página solo manda UN evento a Meta ("InteractuoCotizador"),
+     y solo la primera vez que la persona de verdad toca una opción del cotizador. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1419735723401028');
+</script>
+
+<title>Cotizador de tu sesión de XV años | Simón Castro Fotógrafo</title>
+<meta name="description" content="Arma tu propio plan de sesión de XV años: horas de cobertura, book impreso y sesiones adicionales. Mira el precio total al instante y envíalo por WhatsApp.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://simoncastrofotografo.com/cotizador.html">
+
+<meta name="geo.region" content="CO-ANT">
+<meta name="geo.placename" content="Llanogrande, Rionegro, Antioquia, Colombia">
+
+<link rel="icon" href="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1788406071/6_xbqwe1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{--dark:#04253C;--accent:#E3D6AF;--off:#F8F6F0;--cream:#F4EEDD;--gray:rgba(4,37,60,.62);--surface:#ECE3CC;--surface-2:#E3D6AF;--line:rgba(4,37,60,.22)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;font-weight:300;background:var(--cream);color:var(--dark);-webkit-font-smoothing:antialiased}
+h1,h2,h3,.display{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:.01em}
+a{color:inherit}
+
+/* ---- nav mínima, igual a contrato.html: solo logo + volver ---- */
+nav{position:sticky;top:0;z-index:50;background:rgba(244,238,221,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(4,37,60,.10);padding:15px 24px}
+nav .inner{max-width:1120px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+nav .logo img{height:38px;width:auto;object-fit:contain;display:block}
+nav a.back{display:inline-flex;align-items:center;justify-content:center;padding:10px 18px;border-radius:999px;background:var(--dark);color:var(--cream);font-family:'Jost',sans-serif;font-size:13px;font-weight:500;text-decoration:none;transition:transform .25s,filter .25s}
+nav a.back:hover{filter:brightness(.94);transform:translateY(-1px)}
+
+.wrap{max-width:1000px;margin:auto;padding:0 24px 100px}
+.header{text-align:center;max-width:720px;margin:auto;padding:58px 0 12px}
+.tag{display:inline-block;background:var(--accent);color:var(--dark);padding:6px 14px;border-radius:999px;margin-bottom:18px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+h1{font-weight:500;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.05;margin-bottom:14px}
+.sub{font-size:15.5px;color:var(--gray);max-width:600px;margin:auto;line-height:1.65}
+
+/* ---- armador de plan, copiado del index ---- */
+.plan-builder{max-width:920px;margin:40px auto 0}
+.builder-group{margin-bottom:48px}
+.builder-group h3{font-size:1.3rem;color:var(--dark);margin-bottom:8px;font-weight:500}
+.builder-hint{font-size:.85rem;color:rgba(4,37,60,.55);margin-bottom:20px}
+.option-grid{display:flex;flex-wrap:wrap;gap:16px}
+.option-btn{flex:1 1 220px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;cursor:pointer;font-family:'Jost',sans-serif;display:flex;flex-direction:column;gap:6px;transition:all .25s ease;position:relative}
+.option-btn:hover{border-color:var(--dark);transform:translateY(-2px)}
+.option-btn .opt-name{font-size:.95rem;color:var(--dark);font-weight:500}
+.option-btn .opt-price{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--dark)}
+.option-btn .opt-note{font-size:.72rem;color:rgba(4,37,60,.5)}
+.option-btn.active{background:var(--surface-2);border-color:var(--dark);box-shadow:inset 0 0 0 1px var(--dark)}
+.option-btn.active::after{content:'✓';position:absolute;top:14px;right:16px;width:20px;height:20px;border-radius:50%;background:var(--dark);color:var(--accent);font-size:.68rem;display:flex;align-items:center;justify-content:center}
+.plan-summary{background:#fff;border:1px solid var(--line);border-radius:20px;padding:36px;margin-top:16px;box-shadow:0 20px 60px rgba(4,37,60,.08)}
+.plan-summary h3{font-size:1.3rem;margin-bottom:20px;font-weight:500}
+.summary-list li{display:flex;justify-content:space-between;gap:16px;font-size:.92rem;color:rgba(4,37,60,.75);padding:12px 0;border-bottom:1px solid rgba(4,37,60,.12);list-style:none}
+.summary-list li span:last-child{color:var(--dark);font-weight:500;white-space:nowrap}
+.summary-list .summary-empty{justify-content:flex-start;font-style:italic;color:rgba(4,37,60,.45);border-bottom:none}
+.summary-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:20px;margin-top:10px;border-top:1px solid var(--line);font-family:'Cormorant Garamond',serif}
+.summary-total span:first-child{font-size:1rem;font-family:'Jost',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:rgba(4,37,60,.6)}
+.summary-total span:last-child{font-size:2rem;color:var(--dark)}
+.btn-primary{display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Jost',sans-serif;font-weight:500;font-size:15px;padding:17px 24px;border-radius:999px;width:100%;cursor:pointer;text-decoration:none;background:var(--dark);color:var(--cream);border:0;margin-top:28px;transition:.25s}
+.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn-primary.disabled{opacity:.4;pointer-events:none}
+
+footer{background:var(--cream);border-top:1px solid rgba(4,37,60,.16);padding:36px 0 20px;margin-top:10px}
+.footer-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.footer-inner .logo img{height:38px}
+footer p{color:rgba(32,48,44,.5);font-size:.82rem;max-width:420px;line-height:1.5;margin:0 auto}
+.footer-bottom{margin-top:20px;padding-top:16px;border-top:1px solid rgba(4,37,60,.10);font-size:.72rem;color:rgba(32,48,44,.4);text-align:center}
+
+@media(max-width:720px){
+  nav{padding:13px 18px}nav .logo img{height:34px}nav a.back{font-size:12px;padding:9px 14px}
+  .header{padding-top:42px}h1{font-size:clamp(2rem,10vw,2.6rem)}
+  .option-btn{flex:1 1 100%}.plan-summary{padding:26px 22px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav>
+  <div class="inner">
+    <a href="/" class="logo" aria-label="Volver a Simón Fotografía">
+      <img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1775329971/logo_para_web_oflm4x.png" alt="Simón Fotografía">
+    </a>
+    <a class="back" href="/">Volver a la web</a>
+  </div>
+</nav>
+</header>
+
+<div class="wrap">
+  <div class="header">
+    <span class="tag">Cotizador</span>
+    <h1>Arma <span class="display" style="font-style:italic">tu</span> plan de 15 años.</h1>
+    <p class="sub">Elige las horas de cobertura, tu book y las sesiones que quieras. El precio se actualiza solo y al final lo mandas por WhatsApp con un clic.</p>
+  </div>
+
+  <div class="plan-builder">
+
+    <div class="builder-group">
+      <h3>Cubrimiento de evento de 15 años</h3>
+      <p class="builder-hint">Elige una opción</p>
+      <div class="option-grid" data-group="hours">
+        <button type="button" class="option-btn" data-group="hours" data-id="h5" data-name="Galería digital 5 horas" data-price="1000000">
+          <span class="opt-name">5 horas</span>
+          <span class="opt-price">$1.000.000</span>
+        </button>
+        <button type="button" class="option-btn" data-group="hours" data-id="h7" data-name="Galería digital 7 horas" data-price="1200000">
+          <span class="opt-name">7 horas</span>
+          <span class="opt-price">$1.200.000</span>
+        </button>
+        <button type="button" class="option-btn" data-group="hours" data-id="hfull" data-name="Galería digital full time" data-price="1400000">
+          <span class="opt-name">Full time</span>
+          <span class="opt-price">$1.400.000</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="builder-group">
+      <h3>Book premium en eco cuero</h3>
+      <p class="builder-hint">Elige una opción</p>
+      <div class="option-grid" data-group="book">
+        <button type="button" class="option-btn" data-group="book" data-id="b20" data-name="Book premium eco cuero 20 páginas" data-price="400000">
+          <span class="opt-name">20 páginas</span>
+          <span class="opt-price">$400.000</span>
+        </button>
+        <button type="button" class="option-btn" data-group="book" data-id="b26" data-name="Book premium eco cuero 26 páginas + caja de eco cuero de lujo" data-price="500000">
+          <span class="opt-name">26 páginas + caja de eco cuero de lujo</span>
+          <span class="opt-price">$500.000</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="builder-group">
+      <h3>Sesiones fotográficas de 15 años</h3>
+      <p class="builder-hint">Elige una o las dos — el precio cambia si ya elegiste un plan de horas arriba</p>
+      <div class="option-grid" data-group="extras">
+        <button type="button" class="option-btn" data-group="extras" data-id="pre15" data-name="Sesión pre-15s con retablo grande" data-price-with="350000" data-price-without="430000">
+          <span class="opt-name">Sesión pre-15s con retablo grande</span>
+          <span class="opt-price">$430.000</span>
+          <span class="opt-note">$350.000 si ya elegiste un plan de horas</span>
+        </button>
+        <button type="button" class="option-btn" data-group="extras" data-id="vestido15" data-name="Sesión con vestido de 15s y retablo grande" data-price-with="350000" data-price-without="430000">
+          <span class="opt-name">Sesión con vestido de 15s y retablo grande</span>
+          <span class="opt-price">$430.000</span>
+          <span class="opt-note">$350.000 si ya elegiste un plan de horas</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="plan-summary" id="planSummary">
+      <h3>Tu plan</h3>
+      <ul class="summary-list" id="summaryList">
+        <li class="summary-empty">Todavía no has elegido nada — selecciona tus opciones arriba.</li>
+      </ul>
+      <div class="summary-total">
+        <span>Total</span>
+        <span id="summaryTotal">$0</span>
+      </div>
+      <a href="#" id="planCtaBtn" class="btn-primary disabled" target="_blank" rel="noopener">Escojo este plan</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a href="/" class="logo"><img src="https://res.cloudinary.com/dbwnsmfmo/image/upload/v1775329971/logo_para_web_oflm4x.png" alt="Simón Fotografía"></a>
+    <p>Fotografía de 15 años en El Oriente Antioqueño y Colombia. Sesiones donde las fotos son tan auténticas como tú.</p>
+  </div>
+  <div class="footer-bottom">© 2022 Simón Castro Fotógrafo. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+(function(){
+  const state = { hours: null, book: null, extras: new Set() };
+
+  const optionBtns = document.querySelectorAll('.option-btn');
+  const summaryList = document.getElementById('summaryList');
+  const summaryTotal = document.getElementById('summaryTotal');
+  const ctaBtn = document.getElementById('planCtaBtn');
+
+  // ===== único evento de Meta de toda la página: se dispara UNA sola vez,
+  // la primera vez que la persona de verdad interactúa con el cotizador. =====
+  let yaInteractuo = false;
+  function marcarInteraccion(){
+    if(yaInteractuo) return;
+    yaInteractuo = true;
+    if(typeof fbq === 'function') fbq('trackCustom', 'InteractuoCotizador');
+  }
+
+  function formatCOP(n){ return '$' + n.toLocaleString('es-CO'); }
+
+  function extraPrice(btn){
+    const withHours = parseInt(btn.dataset.priceWith, 10);
+    const withoutHours = parseInt(btn.dataset.priceWithout, 10);
+    return state.hours ? withHours : withoutHours;
+  }
+
+  function refreshExtraPrices(){
+    document.querySelectorAll('.option-btn[data-group="extras"]').forEach(btn => {
+      btn.querySelector('.opt-price').textContent = formatCOP(extraPrice(btn));
+    });
+  }
+
+  function render(){
+    refreshExtraPrices();
+    const items = [];
+
+    if(state.hours){
+      const btn = document.querySelector('.option-btn[data-group="hours"][data-id="' + state.hours + '"]');
+      items.push({ name: btn.dataset.name, price: parseInt(btn.dataset.price, 10) });
+    }
+    if(state.book){
+      const btn = document.querySelector('.option-btn[data-group="book"][data-id="' + state.book + '"]');
+      items.push({ name: btn.dataset.name, price: parseInt(btn.dataset.price, 10) });
+    }
+    state.extras.forEach(id => {
+      const btn = document.querySelector('.option-btn[data-group="extras"][data-id="' + id + '"]');
+      items.push({ name: btn.dataset.name, price: extraPrice(btn) });
+    });
+
+    summaryList.innerHTML = '';
+    if(items.length === 0){
+      summaryList.innerHTML = '<li class="summary-empty">Todavía no has elegido nada — selecciona tus opciones arriba.</li>';
+    } else {
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = '<span>' + item.name + '</span><span>' + formatCOP(item.price) + '</span>';
+        summaryList.appendChild(li);
+      });
+    }
+
+    const total = items.reduce((sum, it) => sum + it.price, 0);
+    summaryTotal.textContent = formatCOP(total);
+    ctaBtn.dataset.total = total;
+
+    if(items.length === 0){
+      ctaBtn.classList.add('disabled');
+      ctaBtn.href = '#';
+    } else {
+      ctaBtn.classList.remove('disabled');
+      let msg = 'Hola Simón, arme este plan en el cotizador para mi sesión de 15s:\n';
+      items.forEach(item => { msg += '• ' + item.name + ' (' + formatCOP(item.price) + ')\n'; });
+      msg += '\nTotal: ' + formatCOP(total);
+      ctaBtn.href = 'https://wa.me/573195706981?text=' + encodeURIComponent(msg);
+    }
+  }
+
+  ctaBtn.addEventListener('click', marcarInteraccion);
+
+  optionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      marcarInteraccion();
+      const group = btn.dataset.group;
+      const id = btn.dataset.id;
+
+      if(group === 'extras'){
+        if(state.extras.has(id)){
+          state.extras.delete(id);
+          btn.classList.remove('active');
+        } else {
+          state.extras.add(id);
+          btn.classList.add('active');
+        }
+      } else {
+        const isActive = state[group] === id;
+        document.querySelectorAll('.option-btn[data-group="' + group + '"]').forEach(b => b.classList.remove('active'));
+        if(isActive){
+          state[group] = null;
+        } else {
+          state[group] = id;
+          btn.classList.add('active');
+        }
+      }
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
