@@ -1,17 +1,20 @@
-// Envía por correo el PDF del contrato firmado: al cliente (con copia oculta al fotógrafo).
-// Requiere dos variables de entorno en Netlify (Site configuration → Environment variables):
-//   GMAIL_USER          → simoncastrofotografo@gmail.com
-//   GMAIL_APP_PASSWORD  → contraseña de aplicación de 16 caracteres (no la contraseña normal de Gmail)
+// netlify/functions/contrato.js
+// Envía por correo el PDF del contrato firmado usando Resend (https://resend.com).
+// No necesita ninguna librería instalada: usa fetch, que ya viene incluido en las
+// funciones de Netlify (Node 18+).
 //
-// Cómo generar la contraseña de aplicación:
-//   1. myaccount.google.com/security → activar "Verificación en 2 pasos" (si no está activa).
-//   2. Buscar "Contraseñas de aplicaciones" → crear una nueva → app "Correo".
-//   3. Copiar el código de 16 letras (sin espacios) y pegarlo como GMAIL_APP_PASSWORD.
+// Variables de entorno requeridas en Netlify (Site configuration → Environment variables):
+//   RESEND_API_KEY   → la clave que te da Resend (empieza con "re_")
+//   FROM_EMAIL       → el remitente verificado, ej: "Simón Castro Fotógrafo <contrato@simoncastrofotografo.com>"
+//
+// IMPORTANTE: para poder enviar a los correos reales de tus clientes (no solo al tuyo),
+// tienes que verificar tu dominio simoncastrofotografo.com dentro de Resend
+// (Resend → Domains → Add Domain → te da unos registros DNS para agregar).
+// Mientras el dominio no esté verificado, Resend solo deja enviar correos a la
+// dirección con la que te registraste en Resend.
 
-const nodemailer = require('nodemailer');
-
-const GMAIL_USER = process.env.GMAIL_USER;
-const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const FROM_EMAIL = process.env.FROM_EMAIL || 'Simón Castro Fotógrafo <onboarding@resend.dev>';
 
 const emailValido = v => typeof v === 'string' && /^\S+@\S+\.\S+$/.test(v);
 
@@ -21,8 +24,8 @@ exports.handler = async (event) => {
   }
 
   try {
-    if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
-      throw new Error('Faltan las variables de entorno GMAIL_USER / GMAIL_APP_PASSWORD en Netlify');
+    if (!RESEND_API_KEY) {
+      throw new Error('Falta la variable de entorno RESEND_API_KEY en Netlify');
     }
 
     const body = JSON.parse(event.body || '{}');
@@ -32,29 +35,37 @@ exports.handler = async (event) => {
     if (!pdfBase64) throw new Error('No llegó el PDF a enviar');
 
     const nombreArchivo = String(archivo || 'Contrato.pdf').replace(/[^a-z0-9._-]+/gi, '_');
+    const destinatarios = [toClient];
+    const bcc = emailValido(toOwner) ? [toOwner] : undefined;
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: GMAIL_USER, pass: GMAIL_APP_PASSWORD }
+    const resp = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: FROM_EMAIL,
+        to: destinatarios,
+        bcc,
+        subject: `Tu contrato firmado — Sesión de ${quinceanera || 'Quince Años'}`,
+        html: `
+          <p>Hola ${nombreCliente || ''},</p>
+          <p>Adjunto encontrarás la copia de tu contrato firmado para la sesión de <b>${quinceanera || ''}</b>${fechaEvento ? ` el ${fechaEvento}` : ''}.</p>
+          <p>Gracias por confiar en Simón Castro Fotógrafo. ¡Nos vemos pronto!</p>
+        `,
+        attachments: [{
+          filename: nombreArchivo,
+          content: pdfBase64
+        }]
+      })
     });
 
-    await transporter.sendMail({
-      from: `"Simón Castro Fotógrafo" <${GMAIL_USER}>`,
-      to: toClient,
-      bcc: emailValido(toOwner) ? toOwner : GMAIL_USER,
-      subject: `Tu contrato firmado — Sesión de ${quinceanera || 'Quince Años'}`,
-      html: `
-        <p>Hola ${nombreCliente || ''},</p>
-        <p>Adjunto encontrarás la copia de tu contrato firmado para la sesión de <b>${quinceanera || ''}</b>${fechaEvento ? ` el ${fechaEvento}` : ''}.</p>
-        <p>Gracias por confiar en Simón Castro Fotógrafo. ¡Nos vemos pronto!</p>
-      `,
-      attachments: [{
-        filename: nombreArchivo,
-        content: pdfBase64,
-        encoding: 'base64',
-        contentType: 'application/pdf'
-      }]
-    });
+    const data = await resp.json().catch(() => ({}));
+
+    if (!resp.ok) {
+      throw new Error(data?.message || `Resend respondió con estado ${resp.status}`);
+    }
 
     return { statusCode: 200, body: JSON.stringify({ enviado: true }) };
   } catch (e) {
