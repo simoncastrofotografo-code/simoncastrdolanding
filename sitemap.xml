@@ -50,6 +50,14 @@
   </url>
 
   <!--
+    Estructura pública actual:
+      /                       -> index.html
+      /portafolio-completo/   -> portafolio-completo/index.html
+      /mariana/               -> mariana/index.html
+      /evelyn/                -> evelyn/index.html
+      /isabella/              -> isabella/index.html
+      /dulce/                 -> dulce/index.html
+
     Galería nueva: crea la carpeta /nombre/ con su index.html y agrega aquí
     una entrada <url> con el mismo formato (https://simoncastrofotografo.com/nombre/).
   -->

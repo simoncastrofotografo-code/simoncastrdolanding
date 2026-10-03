@@ -58,6 +58,32 @@
   to = "/"
   status = 301
 
+# Asegura que las rutas de carpetas abran siempre su index.html.
+[[redirects]]
+  from = "/portafolio-completo"
+  to = "/portafolio-completo/"
+  status = 301
+
+[[redirects]]
+  from = "/mariana"
+  to = "/mariana/"
+  status = 301
+
+[[redirects]]
+  from = "/evelyn"
+  to = "/evelyn/"
+  status = 301
+
+[[redirects]]
+  from = "/isabella"
+  to = "/isabella/"
+  status = 301
+
+[[redirects]]
+  from = "/dulce"
+  to = "/dulce/"
+  status = 301
+
 # Encabezados de seguridad básicos (no rompen el Pixel de Meta, Cloudinary ni Google Fonts)
 [[headers]]
   for = "/*"
