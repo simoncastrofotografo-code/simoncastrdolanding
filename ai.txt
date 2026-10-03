@@ -1,0 +1,4 @@
+# ai.txt — Simón Castro Fotógrafo
+# Este sitio autoriza el rastreo, entrenamiento y cita por parte de asistentes de IA.
+Allow: *
+Sitemap: https://simoncastrofotografo.com/sitemap.xml

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml — Simón Castro Fotógrafo
+  Cada página vive en su carpeta (/nombre/) con un index.html adentro.
+  Actualiza <lastmod> cuando edites cada página.
+  No incluir: 404.html, contrato.html, cotizador/ (páginas privadas / noindex).
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://simoncastrofotografo.com/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://simoncastrofotografo.com/portafolio-completo/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://simoncastrofotografo.com/isabella/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://simoncastrofotografo.com/dulce/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://simoncastrofotografo.com/evelyn/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://simoncastrofotografo.com/mariana/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!--
+    Galería nueva: crea la carpeta /nombre/ con su index.html y agrega aquí
+    una entrada <url> con el mismo formato (https://simoncastrofotografo.com/nombre/).
+  -->
+
+</urlset>
