@@ -1,84 +1,73 @@
-/* =====================================================================
-   tracking.js — Simón Castro Fotógrafo
-   Reglas de eventos de Meta (Pixel 1419735723401028):
-
-   • Botones a WhatsApp  → "Contact"  (UNA sola vez por navegador, aunque
-                            toque otro botón o vuelva otro día)
-   • data-evento="interaccion" → "Interaccion" (plan armado / ir al portafolio)
-   • data-evento="ninguno"     → no dispara nada
-   • Contrato firmado y enviado → "Lead" + "ClienteFinalizado"
-   • Ningún botón dispara "SubscribedButtonClick" (se apaga con
-     autoConfig=false en el código del pixel de cada página).
-   ===================================================================== */
+/* Meta Pixel events — Simón Castro Fotógrafo
+   Contact: every WhatsApp click except explicitly interaction-only CTAs.
+   Interaccion: meaningful engagement and the plan calculator.
+   ClienteFinalizado: only after the contract is signed and its PDF is generated.
+   SubscribedButtonClick is never sent by this script.
+*/
 (function () {
   'use strict';
-
-  // ---- Nombres de eventos (si quieres cambiar alguno, es solo aquí) ----
-  var EVENTO_CONTACTO    = 'Contact';          // evento estándar de Meta
-  var EVENTO_INTERACCION = 'Interaccion';      // evento personalizado
-  var EVENTO_FINALIZADO  = 'ClienteFinalizado';// evento personalizado
-  var KEY_CONTACTO       = 'sc_contacto_enviado';
+  var EVENTO_CONTACTO = 'Contact';
+  var EVENTO_INTERACCION = 'Interaccion';
+  var EVENTO_FINALIZADO = 'ClienteFinalizado';
 
   function px(tipo, nombre, params) {
     try {
-      if (typeof window.fbq === 'function') { window.fbq(tipo, nombre, params || {}); return true; }
+      if (typeof window.fbq === 'function') {
+        window.fbq(tipo, nombre, params || {});
+        return true;
+      }
     } catch (e) {}
     return false;
   }
-
-  // ---- Memoria "ya marcó Contacto" (localStorage + cookie de respaldo) ----
-  function yaMarcoContacto() {
-    try { if (localStorage.getItem(KEY_CONTACTO) === '1') return true; } catch (e) {}
-    return document.cookie.indexOf(KEY_CONTACTO + '=1') !== -1;
-  }
-  function recordarContacto() {
-    try { localStorage.setItem(KEY_CONTACTO, '1'); } catch (e) {}
-    try { document.cookie = KEY_CONTACTO + '=1; max-age=31536000; path=/; SameSite=Lax'; } catch (e) {}
-  }
-
-  function contacto() {
-    if (yaMarcoContacto()) return;
-    if (px('track', EVENTO_CONTACTO)) recordarContacto();
-  }
-
-  function interaccion(params) {
-    px('trackCustom', EVENTO_INTERACCION, params);
-  }
+  function contacto() { px('track', EVENTO_CONTACTO); }
+  function interaccion(params) { px('trackCustom', EVENTO_INTERACCION, params); }
 
   var contratoEnviado = false;
   function contratoFirmado() {
     if (contratoEnviado) return;
     contratoEnviado = true;
-    px('track', 'Lead');
+    // Single custom event to avoid double-counting a standard Lead as well.
     px('trackCustom', EVENTO_FINALIZADO);
   }
-
   function esWhatsApp(a) {
-    var h = (a.hostname || '').toLowerCase();
-    return h === 'wa.me' || h === 'api.whatsapp.com' || h === 'web.whatsapp.com' || h === 'wa.link';
+    try {
+      var u = new URL(a.href, window.location.href);
+      var h = (u.hostname || '').toLowerCase();
+      return h === 'wa.me' || h === 'api.whatsapp.com' || h === 'web.whatsapp.com' || h === 'wa.link';
+    } catch (e) { return false; }
   }
 
-  // Un solo escuchador para toda la página
-  document.addEventListener('click', function (e) {
-    var a = e.target && e.target.closest ? e.target.closest('a') : null;
-    if (!a) return;
+  function marcarInteraccionContrato() {
+    if (document.body && document.body.classList.contains('pagina-contrato') && !window.__scContratoInteraccion) {
+      window.__scContratoInteraccion = true;
+      interaccion({ area: 'contrato' });
+    }
+  }
+  document.addEventListener('focusin', function (e) {
+    var t = e.target;
+    if (t && t.matches && t.matches('input, textarea, select, button, canvas, [role="checkbox"]')) marcarInteraccionContrato();
+  }, true);
 
+  document.addEventListener('click', function (e) {
+    var target = e.target;
+    var a = target && target.closest ? target.closest('a') : null;
+
+    // In the contract, record the first meaningful interaction with the form.
+    if (document.body && document.body.classList.contains('pagina-contrato')) {
+      var control = target && target.closest ? target.closest('input, textarea, select, button, canvas, label, [role="checkbox"]') : null;
+      if (control) marcarInteraccionContrato();
+    }
+    if (!a) return;
     var modo = a.getAttribute('data-evento');
     if (modo === 'ninguno') return;
-
     if (modo === 'interaccion') {
-      if (a.classList.contains('disabled')) return;      // botón del plan aún sin armar
+      if (a.classList.contains('disabled')) return;
       var total = parseInt(a.getAttribute('data-total') || (a.dataset && a.dataset.total) || '0', 10);
-      interaccion(total > 0 ? { value: total, currency: 'COP' } : undefined);
-      return;
+      interaccion(total > 0 ? { value: total, currency: 'COP', area: 'plan' } : { area: 'sitio' });
+      return; // explicitly interaction-only, even when the URL is WhatsApp
     }
-
     if (esWhatsApp(a)) contacto();
   }, true);
 
-  window.simonTrack = {
-    contacto: contacto,
-    interaccion: interaccion,
-    contratoFirmado: contratoFirmado
-  };
+  window.simonTrack = { contacto: contacto, interaccion: interaccion, contratoFirmado: contratoFirmado };
 })();
